@@ -1,129 +1,89 @@
+import React, { useState } from "react";
 import {
   Flex,
-  Text,
-  Stack,
-  Collapse,
-  Icon,
-  Link,
-  useColorModeValue,
-  useDisclosure,
+  IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from "@chakra-ui/react";
-import { FiChevronDown } from "react-icons/fi";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { AiOutlineClose, AiOutlineHome } from "react-icons/ai";
+import { GrRestroomWomen, GrRestroomMen } from "react-icons/gr";
+import { BiChild } from "react-icons/bi";
+import { SiEngadget } from "react-icons/si";
+import { TbBrandShopee } from "react-icons/tb";
+import { NavLink } from "react-router-dom";
+import { menuProps } from "./const.components";
+
+// values
+const menu: menuProps[] = [
+  { to: "/women", title: "WOMEN", icon: <GrRestroomWomen /> },
+  { to: "/men", title: "MEN", icon: <GrRestroomMen /> },
+  { to: "/kids", title: "KIDS", icon: <BiChild /> },
+  { to: "/homedecor", title: "HOME", icon: <AiOutlineHome /> },
+  { to: "/accessories", title: "ACCESSORIES", icon: <SiEngadget /> },
+  { to: "/brands", title: "BRANDS", icon: <TbBrandShopee /> },
+];
+
 const MobileNavbar = () => {
+  const [cross, setCross] = useState(false);
   return (
-    <Stack
-      bg={useColorModeValue("white", "gray.800")}
-      p={4}
-      display={{ md: "none" }}
+    <Flex
+      w="100%"
+      bgColor={navStyles.bgColor}
+      color={navStyles.color}
+      px={{ base: "0.5em", md: "1em", lg: "3em", xl: "8em" }}
+      py="1em"
+      justifyContent="space-between"
+      alignItems="center"
     >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  );
-};
-
-const MobileNavItem = ({ label, children, href }: NavItem) => {
-  const { isOpen, onToggle } = useDisclosure();
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? "#"}
-        justify={"space-between"}
-        align={"center"}
-        _hover={{
-          textDecoration: "none",
-        }}
+      <NavLink
+        to="/"
+        className={({ isActive, isPending }) =>
+          isPending ? "pending" : isActive ? "active" : ""
+        }
+        end
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={FiChevronDown}
-            transition={"all .25s ease-in-out"}
-            transform={isOpen ? "rotate(180deg)" : ""}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
-          align={"start"}
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
+        <Image
+          src="https://imagescdn.pantaloons.com/img/app/brands/pantaloons/icons/logo_pantaloons.svg"
+          w="10em"
+        />
+      </NavLink>
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          colorScheme="#fff"
+          aria-label="Options"
+          icon={cross ? <AiOutlineClose /> : <RxHamburgerMenu />}
+          variant="outline"
+          onClick={() => setCross((prev) => !prev)}
+        />
+        <MenuList color="black">
+          {menu?.map((el) => (
+            <NavLink
+              key={el.to}
+              to={el.to}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+              end
+            >
+              <MenuItem icon={el.icon} onClick={() => setCross(false)}>
+                {el.title}
+              </MenuItem>
+            </NavLink>
+          ))}
+        </MenuList>
+      </Menu>
+    </Flex>
   );
 };
 
 export default MobileNavbar;
 
-interface NavItem {
-  label: string;
-  subLabel?: string;
-  children?: Array<NavItem>;
-  href?: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
-  },
-  {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
-    label: "Hire Designers",
-    href: "#",
-  },
-];
-
-
+const navStyles = {
+  bgColor: "#00b0b5",
+  color: "#fff",
+};

@@ -4,12 +4,9 @@ import Search from "./Search";
 
 import { VscAccount, VscHeart } from "react-icons/vsc";
 import { TfiBag } from "react-icons/tfi";
+import { menuProps } from "./const.components";
 
 // values
-type menuProps = {
-  to: string;
-  title: string;
-};
 const menu: menuProps[] = [
   { to: "/women", title: "WOMEN" },
   { to: "/men", title: "MEN" },
