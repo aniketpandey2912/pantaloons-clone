@@ -39,7 +39,9 @@ function MenuPopover({ menu, left }: popoverProps) {
         </PopoverHeader>
         <PopoverCloseButton />
         <PopoverBody color="black" fontSize="xs">
+          {/* main box */}
           <Flex gap="20px" flexDirection={{ base: "column", md: "row" }}>
+            {/* box1 */}
             <Flex
               justifyContent="space-between"
               w={{ base: "100%", md: "60%" }}
@@ -56,6 +58,7 @@ function MenuPopover({ menu, left }: popoverProps) {
                 </Flex>
               ))}
             </Flex>
+            {/* box2 */}
             <Flex
               flexDirection="column"
               gap="20px"
