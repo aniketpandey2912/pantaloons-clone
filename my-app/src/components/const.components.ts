@@ -27,3 +27,8 @@ export type menuProps = {
     box2: box2Props1[];
   };
 };
+
+// Carousel images props
+export type carouselProps = {
+  images: { id: number | string; img: string }[];
+};

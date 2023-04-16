@@ -91,5 +91,3 @@ const navStyles = {
   bgColor: "#00b0b5",
   color: "#fff",
 };
-
-
