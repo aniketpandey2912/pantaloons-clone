@@ -16,10 +16,10 @@ import { BiChild } from "react-icons/bi";
 import { SiEngadget } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
-import { menuProps } from "./const.components";
+import { navMenuProps } from "./const.components";
 
 // values
-const menu: menuProps[] = [
+const menu: navMenuProps[] = [
   { id: 1, to: "/women", title: "WOMEN", icon: <GrRestroomWomen /> },
   { id: 1, to: "/men", title: "MEN", icon: <GrRestroomMen /> },
   { id: 1, to: "/kids", title: "KIDS", icon: <BiChild /> },
@@ -91,3 +91,5 @@ const navStyles = {
   bgColor: "#00b0b5",
   color: "#fff",
 };
+
+

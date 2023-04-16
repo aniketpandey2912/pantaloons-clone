@@ -1,84 +1,702 @@
-import {
-  Box,
-  Flex,
-  HStack,
-  Icon,
-  Image,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 
 import { VscAccount, VscHeart } from "react-icons/vsc";
 import { TfiBag } from "react-icons/tfi";
-import { menuProps } from "./const.components";
+import { menuProps, navMenuProps } from "./const.components";
+import MenuPopover from "./MenuPopover";
 
-// values
-const menu: menuProps[] = [
-  {
-    id: 1,
-    to: "/women",
-    title: "WOMEN",
-    list1: [
-      "WESTERN WEAR",
-      "Tees & Tops",
-      "Shirts & Blouses",
-      "Dresses & Jumpsuits",
-      "Suits & Blazers",
-      "Sweaters & Sweatshirts",
-      "Shrugs",
-      "Jackets",
-      "Trousers",
-      "Jeans",
-      "Shorts",
-      "Culottes & Capris",
-      "Tracks & Joggers",
-      "Skirts",
-    ],
-    list2: [
+// menu popover details
+const women: menuProps = {
+  title: "WOMEN",
+  menu: {
+    box1: [
       {
         id: 1,
-        heading: "NEW ARRIVALS",
-        items: [
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+        title: "WESTERN WEAR",
+        options: [
+          "Tees & Tops",
+          "Shirts & Blouses",
+          "Dresses & Jumpsuits",
+          "Suits & Blazers",
+          "Sweaters & Sweatshirts",
+          "Shrugs",
+          "Jackets",
+          "Trousers",
+          "Jeans",
+          "Shorts",
+          "Culottes & Capris",
+          "Tracks & Joggers",
+          "Skirts",
         ],
       },
       {
         id: 2,
-        heading: "SHOP BY OCCASION",
-        items: ["Casual", "Work Wear", "Festive", "Party"],
+        title: "ETHNIC WEAR",
+        options: [
+          "Kurtas",
+          "Kurtis & Tunics",
+          "Tops & Cholis",
+          "Kurta Sets",
+          "Dresses",
+          "Dupattas",
+          "Leggings",
+          "Skirts & Lehengas",
+          "Pants & Palazzos",
+          "Churidars & Salwars",
+          "SARIS",
+          "Winter Kurta",
+        ],
       },
       {
         id: 3,
-        heading: "SHOP BY BRANDS",
-        items: [
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
-          "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460285_Womens-Logos-Biba.jpg",
+        title: "FOOTWEAR",
+        options: [
+          "Ballerina",
+          "Flip Flops",
+          "Sandals",
+          "Heels",
+          "Sneakers & Sports Shoes",
+          "Casual Shoes",
+          "Loafers",
+        ],
+      },
+      {
+        id: 4,
+        title: "HANDBAGS",
+        options: ["INNER WEAR", "SLEEPWEAR", "ATHLEISURE", "MASKS", "Beauty"],
+      },
+    ],
+    box2: [
+      {
+        title: "NEW ARRIVALS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+          },
+        ],
+      },
+      {
+        title: "SHOP BY OCCASION",
+        tags: ["Casual", "Work Wear", "Festive", "Party"],
+      },
+      {
+        title: "SHOP BY BRANDS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
+          },
+          {
+            id: 3,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
+          },
+          {
+            id: 4,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460134_Womens-Logos-Bare.jpg",
+          },
+          {
+            id: 5,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632193607_Dreamz.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460023_Womens-Logos-Rangmanch.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460848_Womens-Logos-W.jpg",
+          },
+          {
+            id: 7,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459710_Womens-Logos-SF.jpg",
+          },
+          {
+            id: 8,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460706_Womens-Logos-People.jpg",
+          },
+          {
+            id: 9,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459854_Womens-Logos-Aurelia.jpg",
+          },
         ],
       },
     ],
   },
-  { id: 2, to: "/men", title: "MEN", list1: ["Aniket", "Pandey"] },
-  { id: 3, to: "/kids", title: "KIDS", list1: ["Aniket", "Pandey"] },
-  { id: 4, to: "/homedecor", title: "HOME", list1: ["Aniket", "Pandey"] },
+};
+const men: menuProps = {
+  title: "MEN",
+  menu: {
+    box1: [
+      {
+        id: 1,
+        title: "WESTERN WEAR",
+        options: [
+          "Tees & Tops",
+          "Shirts & Blouses",
+          "Dresses & Jumpsuits",
+          "Suits & Blazers",
+          "Sweaters & Sweatshirts",
+          "Shrugs",
+          "Jackets",
+          "Trousers",
+          "Jeans",
+          "Shorts",
+          "Culottes & Capris",
+          "Tracks & Joggers",
+          "Skirts",
+        ],
+      },
+      {
+        id: 2,
+        title: "ETHNIC WEAR",
+        options: [
+          "Kurtas",
+          "Kurtis & Tunics",
+          "Tops & Cholis",
+          "Kurta Sets",
+          "Dresses",
+          "Dupattas",
+          "Leggings",
+          "Skirts & Lehengas",
+          "Pants & Palazzos",
+          "Churidars & Salwars",
+          "SARIS",
+          "Winter Kurta",
+        ],
+      },
+      {
+        id: 3,
+        title: "FOOTWEAR",
+        options: [
+          "Ballerina",
+          "Flip Flops",
+          "Sandals",
+          "Heels",
+          "Sneakers & Sports Shoes",
+          "Casual Shoes",
+          "Loafers",
+        ],
+      },
+      {
+        id: 4,
+        title: "HANDBAGS",
+        options: ["INNER WEAR", "SLEEPWEAR", "ATHLEISURE", "MASKS", "Beauty"],
+      },
+    ],
+    box2: [
+      {
+        title: "NEW ARRIVALS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+          },
+        ],
+      },
+      {
+        title: "SHOP BY OCCASION",
+        tags: ["Casual", "Work Wear", "Festive", "Party"],
+      },
+      {
+        title: "SHOP BY BRANDS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
+          },
+          {
+            id: 3,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
+          },
+          {
+            id: 4,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460134_Womens-Logos-Bare.jpg",
+          },
+          {
+            id: 5,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632193607_Dreamz.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460023_Womens-Logos-Rangmanch.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460848_Womens-Logos-W.jpg",
+          },
+          {
+            id: 7,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459710_Womens-Logos-SF.jpg",
+          },
+          {
+            id: 8,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460706_Womens-Logos-People.jpg",
+          },
+          {
+            id: 9,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459854_Womens-Logos-Aurelia.jpg",
+          },
+        ],
+      },
+    ],
+  },
+};
+const kids: menuProps = {
+  title: "KIDS",
+  menu: {
+    box1: [
+      {
+        id: 1,
+        title: "WESTERN WEAR",
+        options: [
+          "Tees & Tops",
+          "Shirts & Blouses",
+          "Dresses & Jumpsuits",
+          "Suits & Blazers",
+          "Sweaters & Sweatshirts",
+          "Shrugs",
+          "Jackets",
+          "Trousers",
+          "Jeans",
+          "Shorts",
+          "Culottes & Capris",
+          "Tracks & Joggers",
+          "Skirts",
+        ],
+      },
+      {
+        id: 2,
+        title: "ETHNIC WEAR",
+        options: [
+          "Kurtas",
+          "Kurtis & Tunics",
+          "Tops & Cholis",
+          "Kurta Sets",
+          "Dresses",
+          "Dupattas",
+          "Leggings",
+          "Skirts & Lehengas",
+          "Pants & Palazzos",
+          "Churidars & Salwars",
+          "SARIS",
+          "Winter Kurta",
+        ],
+      },
+      {
+        id: 3,
+        title: "FOOTWEAR",
+        options: [
+          "Ballerina",
+          "Flip Flops",
+          "Sandals",
+          "Heels",
+          "Sneakers & Sports Shoes",
+          "Casual Shoes",
+          "Loafers",
+        ],
+      },
+      {
+        id: 4,
+        title: "HANDBAGS",
+        options: ["INNER WEAR", "SLEEPWEAR", "ATHLEISURE", "MASKS", "Beauty"],
+      },
+    ],
+    box2: [
+      {
+        title: "NEW ARRIVALS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+          },
+        ],
+      },
+      {
+        title: "SHOP BY OCCASION",
+        tags: ["Casual", "Work Wear", "Festive", "Party"],
+      },
+      {
+        title: "SHOP BY BRANDS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
+          },
+          {
+            id: 3,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
+          },
+          {
+            id: 4,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460134_Womens-Logos-Bare.jpg",
+          },
+          {
+            id: 5,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632193607_Dreamz.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460023_Womens-Logos-Rangmanch.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460848_Womens-Logos-W.jpg",
+          },
+          {
+            id: 7,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459710_Womens-Logos-SF.jpg",
+          },
+          {
+            id: 8,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460706_Womens-Logos-People.jpg",
+          },
+          {
+            id: 9,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459854_Womens-Logos-Aurelia.jpg",
+          },
+        ],
+      },
+    ],
+  },
+};
+const homedecor: menuProps = {
+  title: "HOME",
+  menu: {
+    box1: [
+      {
+        id: 1,
+        title: "WESTERN WEAR",
+        options: [
+          "Tees & Tops",
+          "Shirts & Blouses",
+          "Dresses & Jumpsuits",
+          "Suits & Blazers",
+          "Sweaters & Sweatshirts",
+          "Shrugs",
+          "Jackets",
+          "Trousers",
+          "Jeans",
+          "Shorts",
+          "Culottes & Capris",
+          "Tracks & Joggers",
+          "Skirts",
+        ],
+      },
+      {
+        id: 2,
+        title: "ETHNIC WEAR",
+        options: [
+          "Kurtas",
+          "Kurtis & Tunics",
+          "Tops & Cholis",
+          "Kurta Sets",
+          "Dresses",
+          "Dupattas",
+          "Leggings",
+          "Skirts & Lehengas",
+          "Pants & Palazzos",
+          "Churidars & Salwars",
+          "SARIS",
+          "Winter Kurta",
+        ],
+      },
+      {
+        id: 3,
+        title: "FOOTWEAR",
+        options: [
+          "Ballerina",
+          "Flip Flops",
+          "Sandals",
+          "Heels",
+          "Sneakers & Sports Shoes",
+          "Casual Shoes",
+          "Loafers",
+        ],
+      },
+      {
+        id: 4,
+        title: "HANDBAGS",
+        options: ["INNER WEAR", "SLEEPWEAR", "ATHLEISURE", "MASKS", "Beauty"],
+      },
+    ],
+    box2: [
+      {
+        title: "NEW ARRIVALS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+          },
+        ],
+      },
+      {
+        title: "SHOP BY OCCASION",
+        tags: ["Casual", "Work Wear", "Festive", "Party"],
+      },
+      {
+        title: "SHOP BY BRANDS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
+          },
+          {
+            id: 3,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
+          },
+          {
+            id: 4,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460134_Womens-Logos-Bare.jpg",
+          },
+          {
+            id: 5,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632193607_Dreamz.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460023_Womens-Logos-Rangmanch.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460848_Womens-Logos-W.jpg",
+          },
+          {
+            id: 7,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459710_Womens-Logos-SF.jpg",
+          },
+          {
+            id: 8,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460706_Womens-Logos-People.jpg",
+          },
+          {
+            id: 9,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459854_Womens-Logos-Aurelia.jpg",
+          },
+        ],
+      },
+    ],
+  },
+};
+const accessories: menuProps = {
+  title: "ACCESSORIES",
+  menu: {
+    box1: [
+      {
+        id: 1,
+        title: "WESTERN WEAR",
+        options: [
+          "Tees & Tops",
+          "Shirts & Blouses",
+          "Dresses & Jumpsuits",
+          "Suits & Blazers",
+          "Sweaters & Sweatshirts",
+          "Shrugs",
+          "Jackets",
+          "Trousers",
+          "Jeans",
+          "Shorts",
+          "Culottes & Capris",
+          "Tracks & Joggers",
+          "Skirts",
+        ],
+      },
+      {
+        id: 2,
+        title: "ETHNIC WEAR",
+        options: [
+          "Kurtas",
+          "Kurtis & Tunics",
+          "Tops & Cholis",
+          "Kurta Sets",
+          "Dresses",
+          "Dupattas",
+          "Leggings",
+          "Skirts & Lehengas",
+          "Pants & Palazzos",
+          "Churidars & Salwars",
+          "SARIS",
+          "Winter Kurta",
+        ],
+      },
+      {
+        id: 3,
+        title: "FOOTWEAR",
+        options: [
+          "Ballerina",
+          "Flip Flops",
+          "Sandals",
+          "Heels",
+          "Sneakers & Sports Shoes",
+          "Casual Shoes",
+          "Loafers",
+        ],
+      },
+      {
+        id: 4,
+        title: "HANDBAGS",
+        options: ["INNER WEAR", "SLEEPWEAR", "ATHLEISURE", "MASKS", "Beauty"],
+      },
+    ],
+    box2: [
+      {
+        title: "NEW ARRIVALS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631080475_tops.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1631106933_newarrivalswomen-jeans.jpg",
+          },
+        ],
+      },
+      {
+        title: "SHOP BY OCCASION",
+        tags: ["Casual", "Work Wear", "Festive", "Party"],
+      },
+      {
+        title: "SHOP BY BRANDS",
+        images: [
+          {
+            id: 1,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632143381_AjileWomen.jpg",
+          },
+          {
+            id: 2,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460202_Womens-Logos-Akkriti.jpg",
+          },
+          {
+            id: 3,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459907_Womens-Logos-Annabelle.jpg",
+          },
+          {
+            id: 4,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460134_Womens-Logos-Bare.jpg",
+          },
+          {
+            id: 5,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1632193607_Dreamz.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460023_Womens-Logos-Rangmanch.jpg",
+          },
+          {
+            id: 6,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460848_Womens-Logos-W.jpg",
+          },
+          {
+            id: 7,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459710_Womens-Logos-SF.jpg",
+          },
+          {
+            id: 8,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653460706_Womens-Logos-People.jpg",
+          },
+          {
+            id: 9,
+            img: "https://imagescdn.pantaloons.com/uploads/menuitemimages/production/1653459854_Womens-Logos-Aurelia.jpg",
+          },
+        ],
+      },
+    ],
+  },
+};
+
+// values
+const menu: navMenuProps[] = [
+  {
+    id: 1,
+    to: "/women",
+    title: "WOMEN",
+    popover: (
+      <MenuPopover
+        menu={women}
+        left={{ base: "10%", sm: "14%", md: "10%", lg: "14%" }}
+      />
+    ),
+  },
+  {
+    id: 2,
+    to: "/men",
+    title: "MEN",
+    popover: (
+      <MenuPopover
+        menu={men}
+        left={{ base: "10%", sm: "14%", md: "10%", lg: "14%" }}
+      />
+    ),
+  },
+  {
+    id: 3,
+    to: "/kids",
+    title: "KIDS",
+    popover: (
+      <MenuPopover
+        menu={kids}
+        left={{ base: "10%", sm: "3%", md: "10%", lg: "14%" }}
+      />
+    ),
+  },
+  {
+    id: 4,
+    to: "/homedecor",
+    title: "HOME",
+    popover: (
+      <MenuPopover
+        menu={homedecor}
+        left={{ base: "10%", sm: "-7%", md: "9%", lg: "12%" }}
+      />
+    ),
+  },
   {
     id: 5,
     to: "/accessories",
     title: "ACCESSORIES",
-    list1: ["Aniket", "Pandey"],
+    popover: (
+      <MenuPopover
+        menu={accessories}
+        left={{ base: "10%", sm: "-10%", md: "-2%", lg: "2%" }}
+      />
+    ),
   },
-  { id: 6, to: "/brands", title: "BRANDS", list1: ["Aniket", "Pandey"] },
+  { id: 6, to: "/brands", title: "BRANDS" },
 ];
 
 // Main component
@@ -116,11 +734,11 @@ const TabDeskNavbar = () => {
           }
           end
         >
-          <PopoverContentInside
-            title={el.title}
-            list1={el.list1}
-            list2={el.list2}
-          />
+          {el.popover ? (
+            el.popover
+          ) : (
+            <Text _hover={{ textDecoration: "underline" }}>{el.title}</Text>
+          )}
         </NavLink>
       ))}
 
@@ -147,42 +765,3 @@ const navStyles = {
 
 const iconBoxSize = { base: "1.5em", sm: "1.4em", md: "1.4em", lg: "1.2em" };
 const iconDisplay = { base: "none", md: "block" };
-
-const PopoverContentInside = ({ title, list1, list2 }: any) => {
-  return (
-    <Popover isLazy trigger={"hover"}>
-      <PopoverTrigger>
-        <Text>{title}</Text>
-      </PopoverTrigger>
-      <PopoverContent position="relative">
-        <PopoverHeader fontWeight="semibold" color="black">
-          {title}
-        </PopoverHeader>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverBody>
-          <Flex color="black">
-            <VStack textAlign="left">
-              {list1?.map((el: any) => (
-                <Text key={el}>{el}</Text>
-              ))}
-            </VStack>
-            <VStack>
-              <Box>
-                <Text>{list2 && list2[0].heading}</Text>
-                {list2 &&
-                  list2[0].items.map((el: string) => <Image src={el} />)}
-              </Box>
-              <Box>
-                <Text>{list2 && list2[1].heading}</Text>
-              </Box>
-              <Box>
-                <Text>{list2 && list2[2].heading}</Text>
-              </Box>
-            </VStack>
-          </Flex>
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
-  );
-};
