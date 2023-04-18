@@ -10,6 +10,7 @@ import Cart from "../Pages/Cart";
 import Signup from "../Pages/Signup";
 import Login from "../Pages/Login";
 import Accessories from "../Pages/Accessories";
+import WishList from "../Pages/WishList";
 
 type routesProps = {
   path: string;
@@ -25,6 +26,7 @@ const routes: routesProps[] = [
   { path: "/accessories", element: <Accessories /> },
   { path: "/brands", element: <Brands /> },
   { path: "/cart", element: <Cart /> },
+  { path: "/wishlist", element: <WishList /> },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },
 ];

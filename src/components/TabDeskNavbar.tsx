@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Icon, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 
@@ -702,11 +702,28 @@ const TabDeskNavbar = () => {
         <Search />
       </Box>
 
-      <HStack spacing="1.5em">
-        <Icon as={VscAccount} boxSize={iconBoxSize} />
-        <Icon as={VscHeart} boxSize={iconBoxSize} display={iconDisplay} />
-        <Icon as={TfiBag} boxSize={iconBoxSize} display={iconDisplay} />
-      </HStack>
+      <Flex gap="1.5em">
+        <NavLink to="/signup" end>
+          <Icon as={VscAccount} boxSize={iconBoxSize} cursor="pointer" />
+        </NavLink>
+
+        <NavLink to="/wishlist" end>
+          <Icon
+            as={VscHeart}
+            boxSize={iconBoxSize}
+            display={iconDisplay}
+            cursor="pointer"
+          />
+        </NavLink>
+        <NavLink to="/cart" end>
+          <Icon
+            as={TfiBag}
+            boxSize={iconBoxSize}
+            display={iconDisplay}
+            cursor="pointer"
+          />
+        </NavLink>
+      </Flex>
     </Flex>
   );
 };
