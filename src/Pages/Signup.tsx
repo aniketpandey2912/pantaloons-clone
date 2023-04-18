@@ -11,7 +11,6 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
   Select,
   useToast,
 } from "@chakra-ui/react";
@@ -19,6 +18,7 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { clickBtnType, inputType, userType } from "./const.pages";
 import { validation } from "../utils";
+import { NavLink } from "react-router-dom";
 
 const initState: userType = {
   first_name: "",
@@ -31,7 +31,7 @@ const initState: userType = {
 
 const Signup = () => {
   const toast = useToast();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFromData] = useState<userType>(initState);
 
   const handleChange: inputType = (e) => {
@@ -173,7 +173,19 @@ const Signup = () => {
           </Stack>
           <Stack pt={6}>
             <Text align={"center"}>
-              Already a user? <Link color={"#00b0b5"}>Login</Link>
+              Already a user?
+              <NavLink
+                to="/login"
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isPending ? "red" : "rgb(57, 204, 204)",
+                  };
+                }}
+                end
+              >
+                Login
+              </NavLink>
             </Text>
           </Stack>
         </Stack>
