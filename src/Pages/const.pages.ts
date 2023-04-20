@@ -1,6 +1,7 @@
 // user type
 
 export interface userType {
+  _id?: string | number;
   avatar?: string;
   first_name: string;
   last_name: string;

@@ -6,6 +6,10 @@ type authStateType = {
   token: string;
 };
 
+type actionType = {
+  type: string;
+  payload?: any;
+};
 const initState: authStateType = {
   isLoading: false,
   isError: false,
@@ -14,7 +18,7 @@ const initState: authStateType = {
 
 export const authReducer = (
   state = initState,
-  { type, payload }: { type: string; payload: any }
+  { type, payload }: actionType
 ) => {
   switch (type) {
     case types.AUTH_LOADING: {

@@ -7,6 +7,8 @@ import {
 import thunk from "redux-thunk";
 import { authReducer } from "./users/auth.reducer";
 
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
@@ -24,7 +26,10 @@ const store = legacy_createStore(
   composeEnhancers(applyMiddleware(thunk))
 );
 
-export type rootStateType = ReturnType<typeof store.getState>;
-export type dispatchType = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

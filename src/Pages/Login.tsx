@@ -17,7 +17,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { clickBtnType, inputType } from "./const.pages";
 import { validation } from "../utils";
 import { NavLink } from "react-router-dom";
-
+import { loginApi } from "../redux/users/auth.actions";
+import { useAppDispatch } from "../redux/store";
 type loginType = { email: string; password: string };
 
 const initState = {
@@ -26,6 +27,7 @@ const initState = {
 };
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const toast = useToast();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFromData] = useState<loginType>(initState);
@@ -39,12 +41,13 @@ const Login = () => {
   const handleSubmit: clickBtnType = () => {
     if (validation(formData)) {
       console.log(formData);
-      toast({
-        title: "Login sucessful.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+      // dispatch(loginApi(formData.email, formData.password));
+      // toast({
+      //   title: "Login sucessful.",
+      //   status: "success",
+      //   duration: 9000,
+      //   isClosable: true,
+      // });
     } else {
       toast({
         title: "All fields are required",
