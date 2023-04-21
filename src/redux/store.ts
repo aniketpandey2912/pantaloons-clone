@@ -29,7 +29,8 @@ const store = legacy_createStore(
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppDispatch: () => any = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
+export const storeType = typeof store;
 export default store;

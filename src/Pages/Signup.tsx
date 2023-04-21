@@ -18,7 +18,9 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { clickBtnType, inputType, userType } from "./const.pages";
 import { validation } from "../utils";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { signupApi } from "../redux/users/auth.actions";
 
 const initState: userType = {
   first_name: "",
@@ -30,19 +32,33 @@ const initState: userType = {
 };
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((store) => store.authManager);
   const toast = useToast();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFromData] = useState<userType>(initState);
 
   const handleChange: inputType = (e) => {
     let { name, value } = e.target;
-
     setFromData({ ...formData, [name]: value });
   };
 
   const handleSubmit: clickBtnType = () => {
     if (validation(formData)) {
       console.log(formData);
+      dispatch(signupApi({ ...formData })).then((res: any) => {
+        toast({
+          title: res.mssg,
+          status: res.status ? "success" : "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        if (res.status) {
+          navigate("/login");
+        }
+      });
       toast({
         title: "Sign up sucessful.",
         status: "success",
@@ -83,7 +99,7 @@ const Signup = () => {
                 <FormLabel>First Name</FormLabel>
                 <Input
                   type="text"
-                  name="fist_name"
+                  name="first_name"
                   value={formData.first_name}
                   onChange={(e) => handleChange(e)}
                 />
@@ -94,7 +110,7 @@ const Signup = () => {
                 <FormLabel>Last Name</FormLabel>
                 <Input
                   type="text"
-                  name="fist_name"
+                  name="last_name"
                   value={formData.last_name}
                   onChange={(e) => handleChange(e)}
                 />
@@ -106,7 +122,7 @@ const Signup = () => {
             <FormLabel>Email address</FormLabel>
             <Input
               type="email"
-              name="fist_name"
+              name="email"
               value={formData.email}
               onChange={(e) => handleChange(e)}
             />
@@ -117,7 +133,7 @@ const Signup = () => {
             <InputGroup>
               <Input
                 type={showPassword ? "text" : "password"}
-                name="passoword"
+                name="password"
                 value={formData.password}
                 onChange={(e) => handleChange(e)}
               />
@@ -138,6 +154,7 @@ const Signup = () => {
             <FormLabel>Gender</FormLabel>
             <Select
               placeholder="Select gender"
+              name="gender"
               value={formData.gender}
               onChange={(e) => handleChange(e)}
             >
@@ -151,7 +168,7 @@ const Signup = () => {
             <FormLabel>Mobile</FormLabel>
             <Input
               type="number"
-              name="fist_name"
+              name="mobile"
               value={formData.mobile}
               onChange={(e) => handleChange(e)}
             />

@@ -24,7 +24,7 @@ export const authReducer = (
     case types.AUTH_LOADING: {
       return {
         ...state,
-        isLoading: false,
+        isLoading: true,
       };
     }
 
@@ -32,7 +32,7 @@ export const authReducer = (
       return {
         ...state,
         isLoading: false,
-        isError: false,
+        isError: true,
       };
     }
 

@@ -16,9 +16,9 @@ import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { clickBtnType, inputType } from "./const.pages";
 import { validation } from "../utils";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { loginApi } from "../redux/users/auth.actions";
-import { useAppDispatch } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 type loginType = { email: string; password: string };
 
 const initState = {
@@ -27,27 +27,32 @@ const initState = {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((store) => store.authManager);
   const toast = useToast();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFromData] = useState<loginType>(initState);
 
   const handleChange: inputType = (e) => {
     let { name, value } = e.target;
-
     setFromData({ ...formData, [name]: value });
   };
 
-  const handleSubmit: clickBtnType = () => {
+  const handleSubmit: clickBtnType = async () => {
     if (validation(formData)) {
-      console.log(formData);
-      // dispatch(loginApi(formData.email, formData.password));
-      // toast({
-      //   title: "Login sucessful.",
-      //   status: "success",
-      //   duration: 9000,
-      //   isClosable: true,
-      // });
+      dispatch(loginApi(formData.email, formData.password)).then((res: any) => {
+        toast({
+          title: res.mssg,
+          status: res.status ? "success" : "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        if (res.status) {
+          navigate("/");
+        }
+      });
     } else {
       toast({
         title: "All fields are required",
@@ -57,11 +62,12 @@ const Login = () => {
       });
     }
   };
+
   return (
     <Stack mx={"auto"} maxW={"lg"} px={6}>
       <Stack align={"center"} bgColor="rgb(57, 204, 204)">
         <Heading fontSize={"4xl"} textAlign={"center"}>
-          Sign up
+          Login
         </Heading>
         <Text fontSize={"lg"} color={"gray.600"}>
           to enjoy all of our cool features ✌️
@@ -79,7 +85,7 @@ const Login = () => {
             <FormLabel>Email address</FormLabel>
             <Input
               type="email"
-              name="fist_name"
+              name="email"
               value={formData.email}
               onChange={(e) => handleChange(e)}
             />
@@ -90,7 +96,7 @@ const Login = () => {
             <InputGroup>
               <Input
                 type={showPassword ? "text" : "password"}
-                name="passoword"
+                name="password"
                 value={formData.password}
                 onChange={(e) => handleChange(e)}
               />
@@ -109,6 +115,7 @@ const Login = () => {
 
           <Stack spacing={10} pt={2}>
             <Button
+              isLoading={isLoading}
               loadingText="Submitting"
               size="lg"
               bg={"#00b0b5"}
@@ -120,6 +127,7 @@ const Login = () => {
             >
               Login
             </Button>
+            {isLoading ? "Loading" : ""}
           </Stack>
           <Stack pt={6}>
             <Text align={"center"}>
