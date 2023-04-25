@@ -11,6 +11,7 @@ import Signup from "../Pages/Signup";
 import Login from "../Pages/Login";
 import Accessories from "../Pages/Accessories";
 import WishList from "../Pages/WishList";
+import UserAccount from "../Pages/UserAccount";
 
 type routesProps = {
   path: string;
@@ -29,6 +30,7 @@ const routes: routesProps[] = [
   { path: "/wishlist", element: <WishList /> },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },
+  { path: "/useraccount", element: <UserAccount /> },
 ];
 
 const AllRoutes = () => {

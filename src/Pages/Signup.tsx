@@ -176,6 +176,7 @@ const Signup = () => {
 
           <Stack spacing={10} pt={2}>
             <Button
+              isLoading={isLoading}
               loadingText="Submitting"
               size="lg"
               bg={"#00b0b5"}

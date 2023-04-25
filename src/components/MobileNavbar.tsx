@@ -17,6 +17,8 @@ import { SiEngadget } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import { navMenuProps } from "./const.components";
+import { useAppSelector } from "../redux/store";
+import UserInfo from "./UserInfo";
 
 // values
 const menu: navMenuProps[] = [
@@ -29,6 +31,7 @@ const menu: navMenuProps[] = [
 ];
 
 const MobileNavbar = () => {
+  const { token } = useAppSelector((store) => store.authManager);
   const [cross, setCross] = useState(false);
 
   return (
@@ -41,6 +44,7 @@ const MobileNavbar = () => {
       justifyContent="space-between"
       alignItems="center"
     >
+      {token && <UserInfo />}
       <NavLink
         to="/"
         className={({ isActive, isPending }) =>

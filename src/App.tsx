@@ -7,9 +7,11 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <Box>
-      <Center>
-        <Navbar />
-      </Center>
+      <Box w="100%" position="sticky" top="0px" zIndex="1000">
+        <Center>
+          <Navbar />
+        </Center>
+      </Box>
       <Center>
         <AllRoutes />
       </Center>

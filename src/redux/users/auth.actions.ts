@@ -52,7 +52,7 @@ export const loginApi =
       });
       console.log(res.data);
       if (res.data.status) {
-        dispatch(authSuccess(res.data.token));
+        dispatch(authSuccess({ token: res.data.token, user: res.data.data }));
       } else {
         dispatch(authError());
       }

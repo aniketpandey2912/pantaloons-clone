@@ -6,6 +6,8 @@ import { VscAccount, VscHeart } from "react-icons/vsc";
 import { TfiBag } from "react-icons/tfi";
 import { menuProps, navMenuProps } from "./const.components";
 import MenuPopover from "./MenuPopover";
+import UserInfo from "./UserInfo";
+import { useAppSelector } from "../redux/store";
 
 // menu popover details
 const women: menuProps = {
@@ -657,6 +659,7 @@ const menu: navMenuProps[] = [
 
 // Main component
 const TabDeskNavbar = () => {
+  const { token } = useAppSelector((store) => store.authManager);
   return (
     <Flex
       w="100%"
@@ -702,10 +705,14 @@ const TabDeskNavbar = () => {
         <Search />
       </Box>
 
-      <Flex gap="1.5em">
-        <NavLink to="/signup" end>
-          <Icon as={VscAccount} boxSize={iconBoxSize} cursor="pointer" />
-        </NavLink>
+      <Flex gap="1.5em" alignItems="center">
+        {token ? (
+          <UserInfo />
+        ) : (
+          <NavLink to="/signup" end>
+            <Icon as={VscAccount} boxSize={iconBoxSize} cursor="pointer" />
+          </NavLink>
+        )}
 
         <NavLink to="/wishlist" end>
           <Icon
