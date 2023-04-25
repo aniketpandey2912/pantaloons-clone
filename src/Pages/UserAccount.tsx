@@ -11,6 +11,7 @@ import {
   AvatarBadge,
   IconButton,
   Center,
+  Text,
 } from "@chakra-ui/react";
 import { SmallCloseIcon } from "@chakra-ui/icons";
 import React from "react";
@@ -35,11 +36,15 @@ const UserAccount = (props: Props): JSX.Element => {
         p={6}
         my={12}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-          User Profile Edit
-        </Heading>
+        <Flex justifyContent="space-between" alignItems="center">
+          <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+            User Profile
+          </Heading>
+          <Text color="blue" cursor="pointer">
+            Edit
+          </Text>
+        </Flex>
         <FormControl id="userName">
-          <FormLabel>User Icon</FormLabel>
           <Stack direction={["column", "row"]} spacing={6}>
             <Center>
               <Avatar size="xl" src="https://bit.ly/sage-adebayo">

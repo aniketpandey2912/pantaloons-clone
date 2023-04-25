@@ -49,7 +49,7 @@ export const authReducer = (
     case types.AUTH_SUCCESS: {
       localStorage.setItem("token", payload.token);
       localStorage.setItem("user", JSON.stringify(payload.user));
-      console.log(payload.user);
+      // console.log(payload.user);
       return {
         ...state,
         isLoading: false,
@@ -59,6 +59,8 @@ export const authReducer = (
     }
 
     case types.LOGOUT_SUCCESS: {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       return { ...initState };
     }
 

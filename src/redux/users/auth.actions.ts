@@ -28,7 +28,7 @@ export const signupApi = (user: userType) => async (dispatch: Dispatch) => {
 
   try {
     let res: AxiosResponse = await axios.post(`${url}/users/signup`, user);
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.status) {
       dispatch(authSuccess());
     } else {
@@ -50,7 +50,7 @@ export const loginApi =
         email,
         password,
       });
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.status) {
         dispatch(authSuccess({ token: res.data.token, user: res.data.data }));
       } else {
@@ -63,6 +63,6 @@ export const loginApi =
     }
   };
 
-export const logoutApi = () => {
-  logoutSuccess();
+export const logoutApi = () => async (dispatch: AppDispatch) => {
+  dispatch(logoutSuccess());
 };

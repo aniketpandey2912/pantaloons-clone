@@ -705,7 +705,7 @@ const TabDeskNavbar = () => {
         <Search />
       </Box>
 
-      <Flex gap="1.5em" alignItems="center">
+      <Flex gap="1.5em" alignItems={token ? "center" : ""}>
         {token ? (
           <UserInfo />
         ) : (

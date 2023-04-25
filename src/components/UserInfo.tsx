@@ -1,12 +1,16 @@
 import React from "react";
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { Image, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
+import { logoutApi } from "../redux/users/auth.actions";
 
 const UserInfo = () => {
   const { user } = useAppSelector((store) => store.authManager);
+  const dispatch = useAppDispatch();
 
-  console.log(user);
+  const handleLogout = () => {
+    dispatch(logoutApi());
+  };
 
   return (
     <Menu>
@@ -22,7 +26,7 @@ const UserInfo = () => {
         <NavLink to="/useraccount">
           <MenuItem>My Account</MenuItem>
         </NavLink>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </MenuList>
     </Menu>
   );
