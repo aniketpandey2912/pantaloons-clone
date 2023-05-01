@@ -44,7 +44,7 @@ export const signupApi = (user: userType) => async (dispatch: Dispatch) => {
 export const loginApi =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
     dispatch(authLoading());
-
+    // console.log(email, password, url);
     try {
       let res: AxiosResponse = await axios.post(`${url}/users/login`, {
         email,
