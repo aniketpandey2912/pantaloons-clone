@@ -116,7 +116,6 @@ const MyCard = ({ img }: { img: string }) => {
       >
         <Box
           rounded={"lg"}
-          mt={-12}
           pos={"relative"}
           height={"230px"}
           _after={{

@@ -2,6 +2,7 @@ import React from "react";
 import CustomCarousel from "../components/Carousel";
 import { Box } from "@chakra-ui/react";
 import CustomCarousel2 from "../components/Caraousel2";
+import MultiCaraousel from "../components/MultiCaraousel";
 
 const home_images: { id: number | string; img: string }[] = [
   {
@@ -99,7 +100,8 @@ const Home = () => {
         bgSize="cover"
         position="relative"
       >
-        <CustomCarousel2 images={caraousel_images} />
+        {/* <CustomCarousel2 images={caraousel_images} /> */}
+        <MultiCaraousel images={caraousel_images} />
       </Box>
     </Box>
   );
