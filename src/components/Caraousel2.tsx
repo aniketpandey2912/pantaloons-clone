@@ -9,7 +9,7 @@ import {
   Heading,
   Stack,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { carouselProps } from "./const.components";
 import { clickBtnType } from "../Pages/const.pages";
