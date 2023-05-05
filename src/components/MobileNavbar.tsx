@@ -63,7 +63,8 @@ const MobileNavbar = () => {
             as={IconButton}
             colorScheme="#fff"
             aria-label="Options"
-            icon={cross ? <AiOutlineClose /> : <RxHamburgerMenu />}
+            icon={<RxHamburgerMenu />}
+            // icon={cross ? <AiOutlineClose /> : <RxHamburgerMenu />}
             variant="outline"
             onClick={() => setCross((prev) => !prev)}
           />
