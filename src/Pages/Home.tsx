@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import CustomCarousel from "../components/Carousel";
-import { Box, Button, Center, Flex, Heading, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Heading,
+  Image,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import MultiCaraousel from "../components/MultiCaraousel";
 import { Link } from "react-router-dom";
 
@@ -23,7 +32,15 @@ const home_images: { id: number | string; img: string }[] = [
   },
   {
     id: 5,
-    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/apr-2023/week3/Kidswear-D.jpg.transform/i1680x550/image.jpeg",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/week2/homepage/NPT-D.jpg.transform/i1680x550/image.jpeg",
+  },
+  {
+    id: 6,
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/week2/homepage/Summer23-D.jpg.transform/i1680x550/image.jpeg",
+  },
+  {
+    id: 7,
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/week2/homepage/Kidswear-D.jpg.transform/i1680x550/image.jpeg",
   },
 ];
 
@@ -71,6 +88,20 @@ const men_arrival: prodProps[] = [
     title: "Blue Jeans",
     price: 899,
   },
+  {
+    id: 6,
+    img: "https://imagescdn.pantaloons.com/img/app/product/6/629722-6439158.jpg",
+    brand: "Pantaloons",
+    title: "Shirt & Trouser",
+    price: 999,
+  },
+  {
+    id: 7,
+    img: "https://imagescdn.pantaloons.com/img/app/product/6/623753-6128169.jpg",
+    brand: "Pantaloons",
+    title: "Waiste Coat",
+    price: 849,
+  },
 ];
 const wommen_arrival: prodProps[] = [
   {
@@ -107,6 +138,27 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Sea Blue Kurta",
     price: 1799,
+  },
+  {
+    id: 6,
+    img: "https://imagescdn.pantaloons.com/img/app/product/8/880545-10584087.jpg",
+    brand: "Pantaloons",
+    title: "Kurta",
+    price: 1799,
+  },
+  {
+    id: 7,
+    img: "https://imagescdn.pantaloons.com/img/app/product/7/737951-8252695.jpg",
+    brand: "Pantaloons",
+    title: "Kurta Pants",
+    price: 1999,
+  },
+  {
+    id: 8,
+    img: "https://imagescdn.pantaloons.com/img/app/product/8/865437-10247154.jpg",
+    brand: "Bare Denim",
+    title: "Off-white Jeans",
+    price: 1899,
   },
 ];
 const kids_arrival: prodProps[] = [
@@ -145,6 +197,43 @@ const kids_arrival: prodProps[] = [
     title: "SPink Kurta Pyjama Set",
     price: 562,
   },
+  {
+    id: 6,
+    img: "https://imagescdn.pantaloons.com/img/app/product/6/680418-7165462.jpg",
+    brand: "Pantaloons Jr.",
+    title: "Shorts",
+    price: 398,
+  },
+  {
+    id: 7,
+    img: "https://imagescdn.pantaloons.com/img/app/product/7/736525-8226965.jpg",
+    brand: "Pantaloons Jr.",
+    title: "Leggings",
+    price: 398,
+  },
+];
+
+const trendings = [
+  {
+    id: 1,
+    title: "Breezy Summer Stripes",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+  },
+  {
+    id: 2,
+    title: "Denim Daze",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Denim%20Daze.jpg.transform/i296x300/image.jpeg",
+  },
+  {
+    id: 3,
+    title: "Breezy Summer Stripes",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+  },
+  {
+    id: 4,
+    title: "Breezy Summer Stripes",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+  },
 ];
 
 const Home = () => {
@@ -160,6 +249,32 @@ const Home = () => {
       <Box w="100%">
         <CustomCarousel images={home_images} />
       </Box>
+
+      {/* Trendings */}
+      <Center py="20px">
+        <Box
+          w={{ base: "85%", md: "80%", lg: "70%" }}
+          m="auto"
+          py="20px"
+          textAlign={{ base: "center", md: "left" }}
+        >
+          <Heading my="20px">Trending</Heading>
+          <SimpleGrid columns={{ base: 2, md: 4 }} spacing="2%">
+            {trendings?.map((el) => (
+              <Box
+                key={el.id}
+                width={{ base: "90%", sm: "70%", md: "100%", lg: "100%" }}
+                m="auto"
+              >
+                <Link to="#">
+                  <RoundCards title={el.title} img={el.img} />
+                </Link>
+              </Box>
+            ))}
+          </SimpleGrid>
+        </Box>
+      </Center>
+
       <Box
         backgroundImage="https://imagescdn.pantaloons.com/static/brand/pantaloons/production/Website/Desktop-Background.avif"
         backgroundRepeat="no-repeat"
@@ -354,3 +469,12 @@ const Home = () => {
 };
 
 export default Home;
+
+const RoundCards = ({ title, img }: { title: string; img: string }) => {
+  return (
+    <Box textAlign="center">
+      <Image src={img} borderRadius="50%" />
+      <Text>{title}</Text>
+    </Box>
+  );
+};
