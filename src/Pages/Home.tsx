@@ -8,10 +8,10 @@ import {
   Heading,
   Image,
   SimpleGrid,
-  Text,
 } from "@chakra-ui/react";
 import MultiCaraousel from "../components/MultiCaraousel";
 import { Link } from "react-router-dom";
+import RoundCards from "../components/RoundCards";
 
 const home_images: { id: number | string; img: string }[] = [
   {
@@ -213,26 +213,26 @@ const kids_arrival: prodProps[] = [
   },
 ];
 
-const trendings = [
+const trendings: { id: number; img: string; title: string }[] = [
   {
     id: 1,
-    title: "Breezy Summer Stripes",
-    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+    title: "Men",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/men/SS23-2.jpg.transform/i296x300/image.jpeg",
   },
   {
     id: 2,
-    title: "Denim Daze",
-    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Denim%20Daze.jpg.transform/i296x300/image.jpeg",
+    title: "Women",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/women/CoordSets.jpg.transform/i296x300/image.jpeg",
   },
   {
     id: 3,
-    title: "Breezy Summer Stripes",
-    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+    title: "Kids",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/kids/SS23-2.jpg.transform/i296x300/image.jpeg",
   },
   {
     id: 4,
-    title: "Breezy Summer Stripes",
-    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/trending-now/TN-Breezy%20Summer%20Stripes.jpg.transform/i296x300/image.jpeg",
+    title: "Accessories",
+    img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/acc/acc/ToteBags.jpg.transform/i296x300/image.jpeg",
   },
 ];
 
@@ -275,6 +275,7 @@ const Home = () => {
         </Box>
       </Center>
 
+      {/* Men - Deals*/}
       <Box
         backgroundImage="https://imagescdn.pantaloons.com/static/brand/pantaloons/production/Website/Desktop-Background.avif"
         backgroundRepeat="no-repeat"
@@ -292,6 +293,7 @@ const Home = () => {
           <MultiCaraousel images={men_arrival} />
         </Box>
       </Box>
+      {/* Women - Deals */}
       <Box bgColor="gray.100" py="20px">
         <Box w={{ base: "85%", md: "80%", lg: "70%" }} m="auto">
           <Heading
@@ -304,6 +306,8 @@ const Home = () => {
           <MultiCaraousel images={wommen_arrival} />
         </Box>
       </Box>
+
+      {/* Kids - Deals */}
       <Box bgColor="lightblue" py="20px">
         <Box w={{ base: "85%", md: "80%", lg: "70%" }} m="auto">
           <Heading
@@ -316,6 +320,8 @@ const Home = () => {
           <MultiCaraousel images={kids_arrival} />
         </Box>
       </Box>
+
+      {/* card-images */}
       <Box py="50px">
         <Flex
           w="70%"
@@ -469,12 +475,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const RoundCards = ({ title, img }: { title: string; img: string }) => {
-  return (
-    <Box textAlign="center">
-      <Image src={img} borderRadius="50%" />
-      <Text>{title}</Text>
-    </Box>
-  );
-};
