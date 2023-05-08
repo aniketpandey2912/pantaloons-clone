@@ -78,7 +78,7 @@ const Signup = () => {
   return (
     <Stack mx={"auto"} maxW={"lg"} px={6}>
       <Stack align={"center"} bgColor="rgb(57, 204, 204)">
-        <Heading fontSize={"4xl"} textAlign={"center"}>
+        <Heading fontSize={{ base: "2xl", md: "4xl" }} textAlign={"center"}>
           Sign up
         </Heading>
         <Text fontSize={"lg"} color={"gray.600"}>

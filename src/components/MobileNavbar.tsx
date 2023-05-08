@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Box,
   Flex,
+  Icon,
   IconButton,
   Image,
   Menu,
@@ -15,10 +16,11 @@ import { GrRestroomWomen, GrRestroomMen } from "react-icons/gr";
 import { BiChild } from "react-icons/bi";
 import { SiEngadget } from "react-icons/si";
 import { TbBrandShopee } from "react-icons/tb";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { navMenuProps } from "./const.components";
 import { useAppSelector } from "../redux/store";
 import UserInfo from "./UserInfo";
+import { VscAccount } from "react-icons/vsc";
 
 // values
 const menu: navMenuProps[] = [
@@ -45,6 +47,11 @@ const MobileNavbar = () => {
       alignItems="center"
     >
       {token && <UserInfo />}
+      {!token && (
+        <Link to="/signup">
+          <Icon as={VscAccount} boxSize={iconBoxSize} cursor="pointer" />
+        </Link>
+      )}
       <NavLink
         to="/"
         className={({ isActive, isPending }) =>
@@ -96,3 +103,5 @@ const navStyles = {
   bgColor: "#00b0b5",
   color: "#fff",
 };
+
+const iconBoxSize = { base: "1.5em", sm: "1.4em", md: "1.4em", lg: "1.2em" };
