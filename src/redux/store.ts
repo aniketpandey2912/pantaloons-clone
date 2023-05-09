@@ -20,7 +20,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   authManager: authReducer,
-  productsManager : productsReducer
+  productsManager: productsReducer,
 });
 
 const store = legacy_createStore(
