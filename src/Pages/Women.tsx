@@ -1,8 +1,10 @@
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import CustomCarousel from "../components/Carousel";
 import RectangleCards from "../components/RectangleCards";
 import ProductCard from "../components/ProductCard";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { getProductsApi } from "../redux/products/products.actions";
 
 const women_images: { id: number | string; img: string }[] = [
   {
@@ -57,6 +59,16 @@ const rectangle_images: { id: number | string; img: string; title: string }[] =
   ];
 
 const Women = () => {
+  const { data } = useAppSelector((store) => store.productsManager);
+  const { token } = useAppSelector((store) => store.authManager);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProductsApi("products/women", token)).then(() => {
+      console.log(data);
+    });
+  }, []);
+
   return (
     <Box w="100%">
       <CustomCarousel images={women_images} />
@@ -70,8 +82,8 @@ const Women = () => {
         flexWrap="wrap"
         rowGap="10px"
       >
-        {rectangle_images?.map((el) => (
-          <Box key={el.id} w="120px">
+        {rectangle_images?.map((el: any) => (
+          <Box key={el._id} w="120px">
             <RectangleCards img={el.img} title={el.title} />
           </Box>
         ))}
@@ -83,21 +95,11 @@ const Women = () => {
         m="auto"
         spacing={10}
       >
-        <Box>
-          <ProductCard />
-        </Box>
-        <Box>
-          <ProductCard />
-        </Box>
-        <Box>
-          <ProductCard />
-        </Box>
-        <Box>
-          <ProductCard />
-        </Box>
-        <Box>
-          <ProductCard />
-        </Box>
+        {data?.map((el: any) => (
+          <Box key={el._id}>
+            <ProductCard img={el.imageURL} brand={el.Name} price={el.Price} />
+          </Box>
+        ))}
       </SimpleGrid>
     </Box>
   );

@@ -1,8 +1,10 @@
+import React, { useEffect } from "react";
 import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
-import React from "react";
 import CustomCarousel from "../components/Carousel";
 import RectangleCards from "../components/RectangleCards";
 import ProductCard from "../components/ProductCard";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { getProductsApi } from "../redux/products/products.actions";
 
 const kids_images: { id: number | string; img: string }[] = [
   {
@@ -63,6 +65,15 @@ const rectangle_images: { id: number | string; img: string; title: string }[] =
   ];
 
 const Kids = () => {
+  const { data } = useAppSelector((store) => store.productsManager);
+  const { token } = useAppSelector((store) => store.authManager);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProductsApi("products/kids", token)).then(() => {
+      console.log(data);
+    });
+  }, []);
   return (
     <Box w="100%">
       <CustomCarousel images={kids_images} />
@@ -82,11 +93,18 @@ const Kids = () => {
           </Box>
         ))}
       </Flex>
-      <SimpleGrid minChildWidth="120px" spacing="40px">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      <SimpleGrid
+        // border="1px solid black"
+        w={{ base: "80%", sm: "70%", md: "80%", lg: "70%" }}
+        minChildWidth={{ base: "180px", sm: "200px", md: "220px", lg: "250px" }}
+        m="auto"
+        spacing={10}
+      >
+        {data?.map((el: any) => (
+          <Box key={el._id}>
+            <ProductCard img={el.imageURL} brand={el.brand} price={el.Price} />
+          </Box>
+        ))}
       </SimpleGrid>
     </Box>
   );

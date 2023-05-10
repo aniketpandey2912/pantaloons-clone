@@ -27,7 +27,7 @@ export const productsReducer = (
     }
 
     case types.GET_PRODUCTS_SUCCESS: {
-      return { ...state, loading: false, data: payload.data };
+      return { ...state, loading: false, data: payload };
     }
 
     default: {

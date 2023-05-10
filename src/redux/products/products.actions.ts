@@ -12,13 +12,18 @@ const getProductsSuccess = (payload: ProductProps[]) => ({
 });
 
 // APIs
-let url = process.env.URL1;
+let url = process.env.REACT_APP_URL1;
 export const getProductsApi =
-  (path: string) => async (dispatch: AppDispatch) => {
+  (path: string, token: string) => async (dispatch: AppDispatch) => {
     dispatch(productsLoading());
+    // console.log(`${url}/${path}`);
     try {
-      let res = await axios.get(`${url}/${path}`);
-      console.log(res);
+      let res = await axios.get(`${url}/${path}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      console.log("response", res.data.data);
       if (res.data.status) {
         dispatch(getProductsSuccess(res.data.data));
       } else {
