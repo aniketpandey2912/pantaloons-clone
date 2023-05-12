@@ -5,6 +5,7 @@ import RectangleCards from "../components/RectangleCards";
 import ProductCard from "../components/ProductCard";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { getProductsApi } from "../redux/products/products.actions";
+import ProductSkeleton from "../components/ProductSkeleton";
 
 const kids_images: { id: number | string; img: string }[] = [
   {
@@ -28,44 +29,44 @@ const kids_images: { id: number | string; img: string }[] = [
 const rectangle_images: { id: number | string; img: string; title: string }[] =
   [
     {
-      id: 1,
+      id: 101,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/Spring-Kids-Thumbnail.jpg.transform/i207x146/image.jpeg",
       title: "Spring'23 Collection",
     },
     {
-      id: 2,
+      id: 102,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/nov'22/kids/0-2-Kids.jpg.transform/i207x146/image.jpeg",
       title: "0-2 Years",
     },
     {
-      id: 3,
+      id: 103,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/nov'22/kids/2-5-Kids.jpg.transform/i207x146/image.jpeg",
       title: "2-5 Years",
     },
     {
-      id: 4,
+      id: 104,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/nov'22/kids/5-8-Kids.jpg.transform/i207x146/image.jpeg",
       title: "5-8 Years",
     },
     {
-      id: 5,
+      id: 105,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/nov'22/kids/8-10-Kids.jpg.transform/i207x146/image.jpeg",
       title: "8-10 Years",
     },
     {
-      id: 6,
+      id: 106,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/nov'22/kids/10-16-Kids.jpg.transform/i207x146/image.jpeg",
       title: "10-16 Years",
     },
     {
-      id: 7,
+      id: 107,
       img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/kids/Kids-OnlineOnly-Thumbnail.jpg.transform/i207x146/image.jpeg",
       title: "Online Exclusives",
     },
   ];
 
 const Kids = () => {
-  const { data } = useAppSelector((store) => store.productsManager);
+  const { data, loading } = useAppSelector((store) => store.productsManager);
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
@@ -93,19 +94,33 @@ const Kids = () => {
           </Box>
         ))}
       </Flex>
-      <SimpleGrid
-        // border="1px solid black"
-        w={{ base: "80%", sm: "70%", md: "80%", lg: "70%" }}
-        minChildWidth={{ base: "180px", sm: "200px", md: "220px", lg: "250px" }}
-        m="auto"
-        spacing={10}
-      >
-        {data?.map((el: any) => (
-          <Box key={el._id}>
-            <ProductCard img={el.imageURL} brand={el.brand} price={el.Price} />
-          </Box>
-        ))}
-      </SimpleGrid>
+
+      {loading ? (
+        <ProductSkeleton />
+      ) : (
+        <SimpleGrid
+          // border="1px solid black"
+          w={{ base: "80%", sm: "70%", md: "80%", lg: "70%" }}
+          minChildWidth={{
+            base: "180px",
+            sm: "200px",
+            md: "220px",
+            lg: "250px",
+          }}
+          m="auto"
+          spacing={10}
+        >
+          {data?.map((el: any) => (
+            <Box key={el._id}>
+              <ProductCard
+                img={el.imageURL}
+                brand={el.brand}
+                price={el.Price}
+              />
+            </Box>
+          ))}
+        </SimpleGrid>
+      )}
     </Box>
   );
 };

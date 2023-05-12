@@ -22,7 +22,6 @@ type Props = {
 
 interface RatingProps {
   rating: number;
-  // numReviews: number;
 }
 
 function Rating({ rating }: RatingProps) {
@@ -46,9 +45,6 @@ function Rating({ rating }: RatingProps) {
           }
           return <BsStar key={i} style={{ marginLeft: "1" }} />;
         })}
-      {/* <Box as="span" ml="2" color="gray.600" fontSize="sm">
-        {numReviews} review{numReviews > 1 && "s"}
-      </Box> */}
     </Box>
   );
 }
@@ -60,7 +56,6 @@ function ProductCard({ img, brand, price }: Props) {
     name: brand,
     price: price,
     rating: 4.2,
-    // numReviews: 34,
   };
   return (
     <Flex px={5} py={50} w="full" alignItems="center" justifyContent="center">
@@ -86,6 +81,8 @@ function ProductCard({ img, brand, price }: Props) {
           src={data.imageURL}
           alt={`Picture of ${data.name}`}
           roundedTop="lg"
+          h="400px"
+          w="300px"
         />
 
         <Box p="6">
