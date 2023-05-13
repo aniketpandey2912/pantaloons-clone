@@ -94,7 +94,7 @@ const Men = () => {
         <ProductSkeleton />
       ) : (
         <SimpleGrid
-          border="1px solid black"
+          // border="1px solid black"
           w={{ base: "80%", sm: "70%", md: "80%", lg: "70%" }}
           minChildWidth={{
             base: "180px",
