@@ -15,6 +15,7 @@ import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 
 type Props = {
+  id: string;
   img: string;
   brand: string;
   price: number;
@@ -49,7 +50,7 @@ function Rating({ rating }: RatingProps) {
   );
 }
 
-function ProductCard({ img, brand, price }: Props) {
+function ProductCard({ id, img, brand, price }: Props) {
   const data = {
     isNew: true,
     imageURL: img,
@@ -57,6 +58,11 @@ function ProductCard({ img, brand, price }: Props) {
     price: price,
     rating: 4.2,
   };
+
+  const handleAddToCart = () => {
+    console.log(id);
+  };
+
   return (
     <Flex px={5} py={50} w="full" alignItems="center" justifyContent="center">
       <Box
@@ -110,9 +116,13 @@ function ProductCard({ img, brand, price }: Props) {
               color={"gray.800"}
               fontSize={"1.2em"}
             >
-              <chakra.a href={"#"} display={"flex"}>
+              <chakra.p
+                display={"flex"}
+                cursor="pointer"
+                onClick={handleAddToCart}
+              >
                 <Icon as={FiShoppingCart} h={7} w={7} alignSelf={"center"} />
-              </chakra.a>
+              </chakra.p>
             </Tooltip>
           </Flex>
 

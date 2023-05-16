@@ -106,7 +106,12 @@ const Women = () => {
         >
           {data?.map((el: any) => (
             <Box key={el._id}>
-              <ProductCard img={el.imageURL} brand={el.Name} price={el.Price} />
+              <ProductCard
+                id={el._id}
+                img={el.imageURL}
+                brand={el.Name}
+                price={el.Price}
+              />
             </Box>
           ))}
         </SimpleGrid>

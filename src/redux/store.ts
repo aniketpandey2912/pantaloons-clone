@@ -9,6 +9,7 @@ import { authReducer } from "./users/auth.reducer";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { productsReducer } from "./products/products.reducer";
+import { cartReducer } from "./carts/carts.reducer";
 
 declare global {
   interface Window {
@@ -21,6 +22,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   authManager: authReducer,
   productsManager: productsReducer,
+  cartManager: cartReducer,
 });
 
 const store = legacy_createStore(

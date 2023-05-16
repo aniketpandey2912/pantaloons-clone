@@ -113,6 +113,7 @@ const Kids = () => {
           {data?.map((el: any) => (
             <Box key={el._id}>
               <ProductCard
+                id={el._id}
                 img={el.imageURL}
                 brand={el.brand}
                 price={el.Price}
