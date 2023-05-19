@@ -9,17 +9,13 @@ import {
   Icon,
   chakra,
   Tooltip,
+  useToast,
 } from "@chakra-ui/react";
 
 import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
-
-type Props = {
-  id: string;
-  img: string;
-  brand: string;
-  price: number;
-};
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { addCartProductsApi } from "../redux/carts/carts.actions";
 
 interface RatingProps {
   rating: number;
@@ -50,17 +46,44 @@ function Rating({ rating }: RatingProps) {
   );
 }
 
-function ProductCard({ id, img, brand, price }: Props) {
+function ProductCard({ ...prod }: any) {
+  const { imageURL: img, DefaultCategoryLinkRewrite: brand, Price } = prod;
+  const { token } = useAppSelector((store) => store.authManager);
+  const dispatch = useAppDispatch();
+
+  const toast = useToast();
+
   const data = {
     isNew: true,
     imageURL: img,
     name: brand,
-    price: price,
+    price: Price,
     rating: 4.2,
   };
 
   const handleAddToCart = () => {
-    console.log(id);
+    console.log(prod);
+    dispatch(addCartProductsApi(prod, token)).then((res: any) => {
+      console.log(res.status);
+      if (res.status) {
+        toast({
+          title: "Added To Cart",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom",
+          colorScheme: "teal",
+        });
+      } else {
+        toast({
+          title: "Something Went Wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom",
+        });
+      }
+    });
   };
 
   return (

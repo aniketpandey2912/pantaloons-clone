@@ -41,12 +41,7 @@ const HomeDecor = () => {
         >
           {data?.map((el: any) => (
             <Box key={el._id}>
-              <ProductCard
-                id={el._id}
-                img={el.imageURL}
-                brand={el.DefaultCategoryName}
-                price={el.Price}
-              />
+              <ProductCard {...el} />
             </Box>
           ))}
         </SimpleGrid>

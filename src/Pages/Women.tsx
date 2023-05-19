@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { getProductsApi } from "../redux/products/products.actions";
 import ProductSkeleton from "../components/ProductSkeleton";
+import { ProductProps } from "../redux/products/productTypes";
 
 const women_images: { id: number | string; img: string }[] = [
   {
@@ -103,14 +104,9 @@ const Women = () => {
           m="auto"
           spacing={10}
         >
-          {data?.map((el: any) => (
+          {data?.map((el: ProductProps) => (
             <Box key={el._id}>
-              <ProductCard
-                id={el._id}
-                img={el.imageURL}
-                brand={el.Name}
-                price={el.Price}
-              />
+              <ProductCard {...el} />
             </Box>
           ))}
         </SimpleGrid>

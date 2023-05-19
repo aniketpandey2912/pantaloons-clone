@@ -2,9 +2,9 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import EmptyCart from "../components/EmptyCart";
-import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
 import { getCartProductsApi } from "../redux/carts/carts.actions";
+import CartProductCard from "../components/CartProductCard";
 
 const Cart = () => {
   const { data, loading } = useAppSelector((store) => store.cartManager);
@@ -17,7 +17,7 @@ const Cart = () => {
     });
   }, []);
   return (
-    <Box py="50px">
+    <Box w="100%" py="50px">
       {data.length === 0 && <EmptyCart />}
 
       {loading ? (
@@ -37,12 +37,7 @@ const Cart = () => {
         >
           {data?.map((el: any) => (
             <Box key={el._id}>
-              <ProductCard
-                id={el._id}
-                img={el.imageURL}
-                brand={el.DefaultCategoryLinkRewrite}
-                price={el.Price}
-              />
+              <CartProductCard {...el} />
             </Box>
           ))}
         </SimpleGrid>
