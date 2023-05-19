@@ -67,11 +67,10 @@ const rectangle_images: { id: number | string; img: string; title: string }[] =
 
 const Kids = () => {
   const { data, loading } = useAppSelector((store) => store.productsManager);
-  const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProductsApi("products/kids", token)).then(() => {
+    dispatch(getProductsApi("products/kids")).then(() => {
       console.log(data);
     });
   }, []);

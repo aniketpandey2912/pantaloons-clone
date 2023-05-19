@@ -16,7 +16,7 @@ let url = process.env.REACT_APP_URL1;
 export const getCartProductsApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(cartProductsLoading());
-    // console.log(`${url}/${path}`);
+    console.log(token);
     try {
       let res = await axios.get(`${url}/cart/getcart`, {
         headers: {

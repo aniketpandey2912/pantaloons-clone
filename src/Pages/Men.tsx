@@ -62,11 +62,10 @@ const rectangle_images: { id: number | string; img: string; title: string }[] =
 
 const Men = () => {
   const { data, loading } = useAppSelector((store) => store.productsManager);
-  const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProductsApi("products/men", token)).then(() => {
+    dispatch(getProductsApi("products/men")).then(() => {
       console.log(data);
     });
   }, []);

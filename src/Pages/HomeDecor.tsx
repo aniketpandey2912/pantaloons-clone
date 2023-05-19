@@ -7,11 +7,10 @@ import ProductSkeleton from "../components/ProductSkeleton";
 
 const HomeDecor = () => {
   const { data, loading } = useAppSelector((store) => store.productsManager);
-  const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProductsApi("products/homedecors", token)).then(() => {
+    dispatch(getProductsApi("products/homedecors")).then(() => {
       console.log(data);
     });
   }, []);

@@ -12,6 +12,7 @@ import Login from "../Pages/Login";
 import Accessories from "../Pages/Accessories";
 import WishList from "../Pages/WishList";
 import UserAccount from "../Pages/UserAccount";
+import PrivateRoutes from "./PrivateRoutes";
 
 type routesProps = {
   path: string;
@@ -26,11 +27,32 @@ const routes: routesProps[] = [
   { path: "/homedecor", element: <HomeDecor /> },
   { path: "/accessories", element: <Accessories /> },
   { path: "/brands", element: <Brands /> },
-  { path: "/cart", element: <Cart /> },
-  { path: "/wishlist", element: <WishList /> },
+  {
+    path: "/cart",
+    element: (
+      <PrivateRoutes>
+        <Cart />
+      </PrivateRoutes>
+    ),
+  },
+  {
+    path: "/wishlist",
+    element: (
+      <PrivateRoutes>
+        <WishList />
+      </PrivateRoutes>
+    ),
+  },
   { path: "/signup", element: <Signup /> },
   { path: "/login", element: <Login /> },
-  { path: "/useraccount", element: <UserAccount /> },
+  {
+    path: "/useraccount",
+    element: (
+      // <PrivateRoutes>
+      <UserAccount />
+      // </PrivateRoutes>
+    ),
+  },
 ];
 
 const AllRoutes = () => {
