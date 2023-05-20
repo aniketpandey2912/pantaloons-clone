@@ -14,7 +14,14 @@ import {
 } from "@chakra-ui/react";
 
 const CartProductCard = ({ ...prod }) => {
-  const { imageURL: img, DefaultCategoryLinkRewrite: brand, Price, qty } = prod;
+  const {
+    imageURL: img,
+    DefaultCategoryName: brand,
+    Price,
+    qty,
+    Color,
+    Discount,
+  } = prod;
   const [count, setCount] = useState<number>(qty);
 
   const handleQuantity = (val: "INC" | "DEC") => {
@@ -49,10 +56,13 @@ const CartProductCard = ({ ...prod }) => {
         >
           <Box p="10px">
             <Text>{brand}</Text>
-            <Text>Blue Dress</Text>
+            <Text>{Color}</Text>
             <Text>Rs. {Price * count}</Text>
             <Text textDecoration="line-through">
-              Rs.{(Math.floor(Math.random() * 1000) + Price) * count}
+              Rs.
+              {(Discount &&
+                Math.floor(((Discount.Amount || 0) / Price) * 10000) + Price) *
+                count}
             </Text>
           </Box>
         </Flex>

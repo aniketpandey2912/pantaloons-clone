@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, SimpleGrid } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import EmptyCart from "../components/EmptyCart";
@@ -12,18 +12,18 @@ const Cart = () => {
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getCartProductsApi(token)).then(() => {
-  //     // console.log(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    dispatch(getCartProductsApi(token)).then(() => {
+      // console.log(data);
+    });
+  }, []);
   return (
     <Box w="100%" py="50px">
       {loading === false && data?.length === 0 && <EmptyCart />}
 
       {data.length && (
         <Flex
-          border="5px solid green"
+          border="0px solid green"
           w={{ base: "95%", sm: "95%", md: "95%", lg: "80%", xl: "70%" }}
           m="auto"
           justifyContent={{ base: "center", sm: "space-around" }}
@@ -35,7 +35,7 @@ const Cart = () => {
             <ProductSkeleton />
           ) : (
             <SimpleGrid
-              border="1px solid black"
+              border="0px solid black"
               w={{ base: "90%", sm: "60%", md: "50%", lg: "60%" }}
               columns={1}
               spacing={5}
