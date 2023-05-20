@@ -66,8 +66,6 @@ const CartProductCard = ({ ...prod }) => {
             <option value="option3">L</option>
             <option value="option3">XL</option>
           </Select>
-          <Text fontSize="14px">Qty: </Text>
-          <Text fontWeight="bold">{count}</Text>
           <Button
             isDisabled={count === 1}
             size="xs"
@@ -76,6 +74,8 @@ const CartProductCard = ({ ...prod }) => {
           >
             -
           </Button>
+          <Text fontSize="14px">Qty: </Text>
+          <Text fontWeight="bold">{count}</Text>
           <Button
             size="xs"
             colorScheme="pink"
@@ -84,6 +84,13 @@ const CartProductCard = ({ ...prod }) => {
             +
           </Button>
         </HStack>
+        <Button
+          size="sm"
+          colorScheme="pink"
+          onClick={() => handleQuantity("INC")}
+        >
+          Remove
+        </Button>
       </Flex>
     </Card>
   );

@@ -62,7 +62,6 @@ function ProductCard({ ...prod }: any) {
   };
 
   const handleAddToCart = () => {
-    console.log(prod);
     dispatch(addCartProductsApi(prod, token)).then((res: any) => {
       console.log(res.status);
       if (res.status) {
