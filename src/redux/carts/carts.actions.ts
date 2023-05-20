@@ -51,7 +51,6 @@ export const addCartProductsApi =
       );
       // console.log("response", res.data.data);
       if (res.data.status) {
-        getCartProductsApi(token);
         return { status: true };
       } else {
         dispatch(cartProductsError());

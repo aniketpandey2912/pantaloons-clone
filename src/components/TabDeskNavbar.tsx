@@ -1,4 +1,12 @@
-import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import {
+  Avatar,
+  AvatarBadge,
+  Box,
+  Flex,
+  Icon,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 
@@ -7,7 +15,9 @@ import { TfiBag } from "react-icons/tfi";
 import { menuProps, navMenuProps } from "./const.components";
 import MenuPopover from "./MenuPopover";
 import UserInfo from "./UserInfo";
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
+import { useEffect } from "react";
+import { getCartProductsApi } from "../redux/carts/carts.actions";
 
 // menu popover details
 const women: menuProps = {
@@ -660,6 +670,13 @@ const menu: navMenuProps[] = [
 // Main component
 const TabDeskNavbar = () => {
   const { token } = useAppSelector((store) => store.authManager);
+  const { data } = useAppSelector((store) => store.cartManager);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getCartProductsApi(token));
+  }, []);
+
   return (
     <Flex
       w="100%"

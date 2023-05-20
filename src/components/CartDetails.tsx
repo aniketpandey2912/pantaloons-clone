@@ -40,7 +40,7 @@ const CartDetails = (props: Props) => {
     }
     setTotal(sum);
     setDiscount(sum - disc);
-  }, []);
+  }, [data]);
 
   return (
     <Box>
