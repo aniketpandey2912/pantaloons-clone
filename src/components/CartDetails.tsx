@@ -13,10 +13,11 @@ import {
   Tr,
 } from "@chakra-ui/react";
 import { useAppSelector } from "../redux/store";
+import Checkout from "../Pages/Checkout";
 
-type Props = {};
+// type Props = {};
 
-const CartDetails = (props: Props) => {
+const CartDetails = () => {
   const { data } = useAppSelector((store) => store.cartManager);
   const [total, setTotal] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
@@ -31,11 +32,8 @@ const CartDetails = (props: Props) => {
       console.log(data[i].Discount);
       if (data[i].Discount !== null) {
         disc +=
-          (Math.floor(
-            ((data[i].Discount.Amount || 0) / data[i].Price) * 10000
-          ) +
-            data[i].Price) *
-          data[i].qty;
+          Math.floor(((data[i].Discount.Amount || 0) / data[i].Price) * 10000) +
+          data[i].Price * data[i].qty;
       }
     }
     setTotal(sum);
@@ -61,7 +59,7 @@ const CartDetails = (props: Props) => {
               </Tr>
               <Tr>
                 <Td>Discounts</Td>
-                <Td>Rs. {discount}</Td>
+                <Td>Rs. {total - discount}</Td>
               </Tr>
               <Tr>
                 <Td>
@@ -75,7 +73,7 @@ const CartDetails = (props: Props) => {
               </Tr>
               <Tr>
                 <Th>My Savings</Th>
-                <Th>Rs. {discount}</Th>
+                <Th>Rs. {total - discount}</Th>
               </Tr>
             </Tbody>
             <Tfoot textAlign="center" border="0px solid black">
@@ -86,9 +84,9 @@ const CartDetails = (props: Props) => {
                 <Text ml="50%" fontSize="14px" border="0px solid red">
                   (including Taxes)
                 </Text>
-                <Button colorScheme="teal" w="100%" ml="25%">
-                  CHECKOUT
-                </Button>
+                <Box w="100%" ml="25%">
+                  <Checkout />
+                </Box>
               </Box>
             </Tfoot>
           </Table>

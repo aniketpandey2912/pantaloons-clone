@@ -1,8 +1,8 @@
 import axios from "axios";
 import { AppDispatch } from "../store";
-// import { CartProductProps } from "./cartTypes";
 import * as types from "./carts.types";
 import { ProductProps } from "../products/productTypes";
+import { CartProductProps } from "./cartTypes";
 
 const cartProductsLoading = () => ({ type: types.CART_PRODUCTS_LOADING });
 const cartProductsError = () => ({ type: types.CART_PRODUCTS_ERROR });
@@ -36,7 +36,8 @@ export const getCartProductsApi =
     }
   };
 export const addCartProductsApi =
-  (product: ProductProps, token: string) => async (dispatch: AppDispatch) => {
+  (product: ProductProps | CartProductProps, token: string) =>
+  async (dispatch: AppDispatch) => {
     dispatch(cartProductsLoading());
     // console.log(`${url}/${path}`);
     try {
@@ -51,6 +52,34 @@ export const addCartProductsApi =
       );
       // console.log("response", res.data.data);
       if (res.data.status) {
+        return { status: true };
+      } else {
+        dispatch(cartProductsError());
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(cartProductsError());
+    }
+  };
+
+export const decreaseQtyCartProductsApi =
+  (product: ProductProps | CartProductProps, token: string) =>
+  async (dispatch: AppDispatch) => {
+    dispatch(cartProductsLoading());
+    // console.log(`${url}/${path}`);
+    try {
+      let res = await axios.post(
+        `${url}/cart/decreaseqty`,
+        { prod: product },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      // console.log("response", res.data.data);
+      if (res.data.status) {
+        getCartProductsApi(token);
         return { status: true };
       } else {
         dispatch(cartProductsError());

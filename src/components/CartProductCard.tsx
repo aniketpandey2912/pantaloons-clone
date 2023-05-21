@@ -22,11 +22,13 @@ import {
 } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import {
+  addCartProductsApi,
+  decreaseQtyCartProductsApi,
   deleteCartProductsApi,
   getCartProductsApi,
 } from "../redux/carts/carts.actions";
 
-const CartProductCard = ({ ...prod }) => {
+const CartProductCard = ({ ...prod }: any) => {
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
   const toast = useToast();
@@ -45,16 +47,47 @@ const CartProductCard = ({ ...prod }) => {
   const cancelRef = React.useRef<any>();
 
   const handleQuantity = (val: "INC" | "DEC") => {
-    if (val === "INC") setCount((prev) => prev + 1);
-    else setCount((prev) => prev - 1);
+    if (val === "INC") {
+      setCount((prev) => prev + 1);
+      handleIncreaseQty();
+    } else {
+      setCount((prev) => prev - 1);
+      handleDecreaseQty();
+    }
   };
 
   const handleIncreaseQty = () => {
-    // dispatch()
+    dispatch(addCartProductsApi(prod, token)).then((res: any) => {
+      console.log(res);
+      if (res.status === false) {
+        toast({
+          title: "Something went wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom",
+        });
+      } else {
+        dispatch(getCartProductsApi(token));
+      }
+    });
   };
 
   const handleDecreaseQty = () => {
-    // dispatch()
+    dispatch(decreaseQtyCartProductsApi(prod, token)).then((res: any) => {
+      console.log(res);
+      if (res.status === false) {
+        toast({
+          title: "Something went wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "bottom",
+        });
+      } else {
+        dispatch(getCartProductsApi(token));
+      }
+    });
   };
 
   const handleRemove = () => {
@@ -115,7 +148,9 @@ const CartProductCard = ({ ...prod }) => {
             <Box p="10px">
               <Text>{brand}</Text>
               <Text>{Color}</Text>
-              <Text>Rs. {Price * count}</Text>
+              <Text>
+                Rs. {Price} x {count}
+              </Text>
               <Text textDecoration="line-through">
                 Rs.
                 {(Discount &&

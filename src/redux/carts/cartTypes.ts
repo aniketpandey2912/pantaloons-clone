@@ -1,4 +1,5 @@
 export interface CartProductProps {
+  userID: string;
   _id: string;
   clickURL: string;
   clickTrackingURL: string;

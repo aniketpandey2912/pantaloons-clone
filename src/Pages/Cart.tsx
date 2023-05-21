@@ -2,21 +2,21 @@ import { Box, Flex, SimpleGrid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import EmptyCart from "../components/EmptyCart";
-import ProductSkeleton from "../components/ProductSkeleton";
 import { getCartProductsApi } from "../redux/carts/carts.actions";
 import CartProductCard from "../components/CartProductCard";
 import CartDetails from "../components/CartDetails";
+import CartSkeleton from "../components/CartSkeleton";
 
 const Cart = () => {
   const { data, loading } = useAppSelector((store) => store.cartManager);
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getCartProductsApi(token)).then(() => {
-      // console.log(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCartProductsApi(token)).then(() => {
+  //     // console.log(data);
+  //   });
+  // }, []);
   return (
     <Box w="100%" py="50px">
       {loading === false && data?.length === 0 && <EmptyCart />}
@@ -32,7 +32,7 @@ const Cart = () => {
           flexDir={{ base: "column-reverse", sm: "row" }}
         >
           {loading ? (
-            <ProductSkeleton />
+            <CartSkeleton />
           ) : (
             <SimpleGrid
               border="0px solid black"
