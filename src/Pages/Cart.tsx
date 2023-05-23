@@ -12,11 +12,11 @@ const Cart = () => {
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getCartProductsApi(token)).then(() => {
-  //     // console.log(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    dispatch(getCartProductsApi(token)).then(() => {
+      // console.log(data);
+    });
+  }, []);
   return (
     <Box w="100%" py="50px">
       {loading === false && data?.length === 0 && <EmptyCart />}

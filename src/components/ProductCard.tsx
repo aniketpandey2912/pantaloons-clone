@@ -16,6 +16,7 @@ import { BsStar, BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiShoppingCart } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addCartProductsApi } from "../redux/carts/carts.actions";
+import { Link } from "react-router-dom";
 
 interface RatingProps {
   rating: number;
@@ -47,7 +48,7 @@ function Rating({ rating }: RatingProps) {
 }
 
 function ProductCard({ ...prod }: any) {
-  const { imageURL: img, DefaultCategoryLinkRewrite: brand, Price } = prod;
+  const { imageURL: img, DefaultCategoryLinkRewrite: brand, Price, id } = prod;
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
@@ -86,7 +87,14 @@ function ProductCard({ ...prod }: any) {
   };
 
   return (
-    <Flex px={5} py={50} w="full" alignItems="center" justifyContent="center">
+    <Flex
+      px={5}
+      py={50}
+      w="full"
+      alignItems="center"
+      justifyContent="center"
+      border={"0px solid black"}
+    >
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="sm"
@@ -105,32 +113,39 @@ function ProductCard({ ...prod }: any) {
           />
         )}
 
-        <Image
-          src={data.imageURL}
-          alt={`Picture of ${data.name}`}
-          roundedTop="lg"
-          h="400px"
-          w="300px"
-        />
+        <Link to={`/productdetailings/${id}`}>
+          <Image
+            src={data.imageURL}
+            alt={`Picture of ${data.name}`}
+            roundedTop="lg"
+            h="400px"
+            w="300px"
+          />
+        </Link>
 
         <Box p="6">
-          <Box display="flex" alignItems="baseline">
-            {data.isNew && (
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                Just In !
-              </Badge>
-            )}
-          </Box>
-          <Flex mt="1" justifyContent="space-between" alignContent="center">
-            <Box
-              fontSize="2xl"
-              fontWeight="semibold"
-              as="h4"
-              lineHeight="tight"
-              isTruncated
-            >
-              {data.name}
+          <Link to={`/productdetailings/${id}`}>
+            <Box display="flex" alignItems="baseline">
+              {data.isNew && (
+                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
+                  Just In !
+                </Badge>
+              )}
             </Box>
+          </Link>
+
+          <Flex mt="1" justifyContent="space-between" alignContent="center">
+            <Link to={`/productdetailings/${id}`}>
+              <Box
+                fontSize="2xl"
+                fontWeight="semibold"
+                as="h4"
+                lineHeight="tight"
+                isTruncated
+              >
+                {data.name}
+              </Box>
+            </Link>
             <Tooltip
               label="Add to cart"
               bg="white"
@@ -147,16 +162,20 @@ function ProductCard({ ...prod }: any) {
               </chakra.p>
             </Tooltip>
           </Flex>
-
-          <Flex justifyContent="space-between" alignContent="center">
-            <Rating rating={data.rating} />
-            <Box fontSize="2xl" color={useColorModeValue("gray.800", "white")}>
-              <Box as="span" color={"gray.600"} fontSize="lg">
-                Rs.
+          <Link to={`/productdetailings/${id}`}>
+            <Flex justifyContent="space-between" alignContent="center">
+              <Rating rating={data.rating} />
+              <Box
+                fontSize="2xl"
+                color={useColorModeValue("gray.800", "white")}
+              >
+                <Box as="span" color={"gray.600"} fontSize="lg">
+                  Rs.
+                </Box>
+                {data.price}
               </Box>
-              {data.price}
-            </Box>
-          </Flex>
+            </Flex>
+          </Link>
         </Box>
       </Box>
     </Flex>

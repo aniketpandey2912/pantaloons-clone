@@ -1,4 +1,5 @@
 import { userType } from "../../Pages/const.pages";
+import { url } from "../../utils";
 import { AppDispatch } from "../store";
 import * as types from "./auth.types";
 import axios, { AxiosResponse } from "axios";
@@ -19,8 +20,6 @@ const authSuccess = (payload?: any): actionType => ({
 });
 
 const logoutSuccess = (): actionType => ({ type: types.LOGOUT_SUCCESS });
-
-const url = process.env.REACT_APP_URL1;
 
 // APIs
 export const signupApi = (user: userType) => async (dispatch: Dispatch) => {

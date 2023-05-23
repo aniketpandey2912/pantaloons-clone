@@ -5,12 +5,14 @@ interface initProps {
   loading: boolean;
   error: boolean;
   data: ProductProps[];
+  singleProd: ProductProps | {};
 }
 
 const initState: initProps = {
   loading: false,
   error: false,
   data: [],
+  singleProd: {},
 };
 
 export const productsReducer = (
@@ -28,6 +30,10 @@ export const productsReducer = (
 
     case types.GET_PRODUCTS_SUCCESS: {
       return { ...state, loading: false, data: payload };
+    }
+
+    case types.GET_SINGLE_PRODUCTS_SUCCESS: {
+      return { ...state, loading: false, singleProd: payload };
     }
 
     default: {

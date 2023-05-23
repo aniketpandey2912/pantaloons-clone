@@ -2,6 +2,7 @@ import axios from "axios";
 import { AppDispatch } from "../store";
 import { ProductProps } from "./productTypes";
 import * as types from "./products.types";
+import { url } from "../../utils";
 
 const productsLoading = () => ({ type: types.PRODUCTS_LOADING });
 const productsError = () => ({ type: types.PRODUCTS_ERROR });
@@ -11,8 +12,13 @@ const getProductsSuccess = (payload: ProductProps[]) => ({
   payload,
 });
 
+const getSingleProductsSuccess = (payload: ProductProps) => ({
+  type: types.GET_SINGLE_PRODUCTS_SUCCESS,
+  payload,
+});
+
 // APIs
-let url = process.env.REACT_APP_URL1;
+
 export const getProductsApi =
   (path: string) => async (dispatch: AppDispatch) => {
     dispatch(productsLoading());
@@ -22,6 +28,24 @@ export const getProductsApi =
       console.log("response", res.data.data);
       if (res.data.status) {
         dispatch(getProductsSuccess(res.data.data));
+      } else {
+        dispatch(productsError());
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(productsError());
+    }
+  };
+
+export const getProductsByIDApi =
+  (prodID: string) => async (dispatch: AppDispatch) => {
+    dispatch(productsLoading());
+    console.log(prodID);
+    try {
+      let res = await axios.get(`${url}/products/allproducts/${prodID}`);
+      console.log("response", res.data);
+      if (res.data.status) {
+        dispatch(getSingleProductsSuccess(res.data.data));
       } else {
         dispatch(productsError());
       }

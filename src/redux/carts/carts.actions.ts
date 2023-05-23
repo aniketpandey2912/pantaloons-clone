@@ -3,6 +3,7 @@ import { AppDispatch } from "../store";
 import * as types from "./carts.types";
 import { ProductProps } from "../products/productTypes";
 import { CartProductProps } from "./cartTypes";
+import { url } from "../../utils";
 
 const cartProductsLoading = () => ({ type: types.CART_PRODUCTS_LOADING });
 const cartProductsError = () => ({ type: types.CART_PRODUCTS_ERROR });
@@ -12,8 +13,9 @@ const getCartProductsSuccess = (payload: ProductProps[]) => ({
   payload,
 });
 
+const deleteCartAllSuccess = () => ({ type: types.CART_DELETE_ALL_SUCCESS });
+
 // APIs
-let url = process.env.REACT_APP_URL1;
 export const getCartProductsApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(cartProductsLoading());
@@ -108,6 +110,29 @@ export const deleteCartProductsApi =
         dispatch(cartProductsError());
         return { status: false };
       }
+    } catch (err) {
+      console.log(err);
+      dispatch(cartProductsError());
+    }
+  };
+
+export const deleteCartAllApi =
+  (token: string) => async (dispatch: AppDispatch) => {
+    dispatch(cartProductsLoading());
+    // console.log(`${url}/${path}`);
+    try {
+      let res = await axios.delete(`${url}/cart/deletemycart`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      // console.log("response", res.data.data);
+      if (res.data.status) {
+        dispatch(deleteCartAllSuccess());
+      } else {
+        dispatch(cartProductsError());
+      }
+      return { status: res.data.status, mssg: res.data.mssg };
     } catch (err) {
       console.log(err);
       dispatch(cartProductsError());

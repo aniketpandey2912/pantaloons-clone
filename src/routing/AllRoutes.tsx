@@ -13,6 +13,7 @@ import Accessories from "../Pages/Accessories";
 import WishList from "../Pages/WishList";
 import UserAccount from "../Pages/UserAccount";
 import PrivateRoutes from "./PrivateRoutes";
+import ProductDetailsCard from "../components/ProductDetailsCard";
 
 type routesProps = {
   path: string;
@@ -27,6 +28,7 @@ const routes: routesProps[] = [
   { path: "/homedecor", element: <HomeDecor /> },
   { path: "/accessories", element: <Accessories /> },
   { path: "/brands", element: <Brands /> },
+  { path: "/productdetailings/:prodID", element: <ProductDetailsCard /> },
   {
     path: "/cart",
     element: (

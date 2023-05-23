@@ -1,37 +1,36 @@
-import * as types from "./carts.types";
-import { CartProductProps } from "./cartTypes";
+import * as types from "./orders.types";
 
 interface initProps {
   loading: boolean;
   error: boolean;
-  data: CartProductProps[];
+  orders: any;
 }
 
 const initState: initProps = {
   loading: false,
   error: false,
-  data: [],
+  orders: [],
 };
 
-export const cartReducer = (
+export const ordersReducer = (
   state = initState,
   { type, payload }: { type: string; payload: any }
 ) => {
   switch (type) {
-    case types.CART_PRODUCTS_LOADING: {
+    case types.ORDERS_LOADING: {
       return { ...state, loading: true };
     }
 
-    case types.CART_PRODUCTS_ERROR: {
+    case types.ORDERS_ERROR: {
       return { ...state, loading: false, error: true };
     }
 
-    case types.CART_GET_PRODUCTS_SUCCESS: {
-      return { ...state, loading: false, data: payload };
+    case types.GET_ORDERS_SUCCESS: {
+      return { ...state, loading: false, orders: payload };
     }
 
-    case types.CART_DELETE_ALL_SUCCESS: {
-      return { ...initState };
+    case types.ADD_ORDERS_SUCCESS: {
+      return { ...state, loading: false, orders: [...state.orders, payload] };
     }
 
     default: {
