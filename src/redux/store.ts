@@ -11,6 +11,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { productsReducer } from "./products/products.reducer";
 import { cartReducer } from "./carts/carts.reducer";
 import { ordersReducer } from "./orders/orders.reducer";
+import { wishlistReducer } from "./wishlist/wishtlist.reducer";
 
 declare global {
   interface Window {
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   authManager: authReducer,
   productsManager: productsReducer,
   cartManager: cartReducer,
+  wishlistManager: wishlistReducer,
   ordersManager: ordersReducer,
 });
 

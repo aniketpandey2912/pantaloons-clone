@@ -16,7 +16,7 @@ const Cart = () => {
     dispatch(getCartProductsApi(token)).then(() => {
       // console.log(data);
     });
-  }, []);
+  }, [dispatch, token]);
   return (
     <Box w="100%" py="50px">
       {loading === false && data?.length === 0 && <EmptyCart />}

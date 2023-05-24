@@ -20,21 +20,33 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addOrdersApi } from "../redux/orders/orders.actions";
 import { OrderProps } from "../redux/orders/ordersTypes";
 import { deleteCartAllApi } from "../redux/carts/carts.actions";
+import { validation } from "../utils";
 
-interface intiType {
+interface intiTypeAdderss {
   house: string;
   city: string;
   postalAddress: string;
   state: string;
   country: string;
 }
+interface intiTypePayment {
+  cardno: string;
+  pin: string;
+  cvv: string;
+}
 
-const initState: intiType = {
+const initStateAddress: intiTypeAdderss = {
   house: "",
   city: "",
   postalAddress: "",
   state: "",
   country: "",
+};
+
+const initStatePayment: intiTypePayment = {
+  cardno: "",
+  pin: "",
+  cvv: "",
 };
 
 const Checkout = (props: any) => {
@@ -56,11 +68,20 @@ const Checkout = (props: any) => {
     "CashOnDelivery"
   );
 
-  const [formData, setFormData] = useState<intiType>(initState);
+  const [formData, setFormData] = useState<intiTypeAdderss>(initStateAddress);
+  const [paymentData, setPaymentData] =
+    useState<intiTypePayment>(initStatePayment);
+  const [error, setError] = useState<boolean | string>(false);
 
   const handleFormData: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (error) setError(false);
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+  const handlePaymentData: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (error) setError(false);
+    const { name, value } = e.target;
+    setPaymentData({ ...paymentData, [name]: value });
   };
 
   const handleConfirmOrder = () => {
@@ -68,6 +89,11 @@ const Checkout = (props: any) => {
       payment: { mode: paymentMode, amount: 1500 },
       address: { ...formData },
     };
+
+    if (paymentMode === "Online" && validation(paymentData) === false) {
+      setError("All fields are reuired");
+      return;
+    }
     dispatch(addOrdersApi(order, token)).then((res: any) => {
       console.log(res);
       if (res.status) {
@@ -90,7 +116,11 @@ const Checkout = (props: any) => {
   };
 
   const handleNextForm = () => {
-    setFormType("paymentmode");
+    if (validation(formData)) {
+      setFormType("paymentmode");
+    } else {
+      setError("All fields are required");
+    }
   };
 
   const openModal = () => {
@@ -118,6 +148,7 @@ const Checkout = (props: any) => {
             <Box>
               {formType === "address" && (
                 <VStack>
+                  {error && <Text color="red">{error}*</Text>}
                   <Text w="100%">Delivery Address</Text>
                   <Input
                     type="text"
@@ -158,6 +189,7 @@ const Checkout = (props: any) => {
               )}
               {formType === "paymentmode" && (
                 <>
+                  <Text>Select payment method</Text>
                   <Select
                     placeholder="Select payment option"
                     // see explanation below
@@ -167,15 +199,37 @@ const Checkout = (props: any) => {
                       )
                     }
                   >
-                    <option value="CashOnDelivery">Cash on delivery</option>
+                    <option value="CashOnDelivery" selected>
+                      Cash on delivery
+                    </option>
                     <option value="Online">Online payment</option>
                   </Select>
                   {paymentMode === "Online" && (
                     <VStack w="100%" py="10px">
                       <Text width="100%">Card Details</Text>
-                      <Input type="text" placeholder="card no." />
-                      <Input type="password" placeholder="pin" />
-                      <Input type="text" placeholder="cvv" />
+                      {error && (
+                        <Text textAlign="center" color="red">
+                          {error}*
+                        </Text>
+                      )}
+                      <Input
+                        type="text"
+                        placeholder="card no."
+                        name="cardno"
+                        onChange={(e) => handlePaymentData(e)}
+                      />
+                      <Input
+                        type="password"
+                        placeholder="pin"
+                        name="pin"
+                        onChange={(e) => handlePaymentData(e)}
+                      />
+                      <Input
+                        type="text"
+                        placeholder="cvv"
+                        name="cvv"
+                        onChange={(e) => handlePaymentData(e)}
+                      />
                     </VStack>
                   )}
                 </>
