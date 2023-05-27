@@ -40,15 +40,17 @@ export const getProductsApi =
 export const getProductsByIDApi =
   (prodID: string) => async (dispatch: AppDispatch) => {
     dispatch(productsLoading());
-    console.log(prodID);
+    // console.log(prodID);
+    console.log(`${url}/products/allproducts/${prodID}`);
     try {
       let res = await axios.get(`${url}/products/allproducts/${prodID}`);
-      console.log("response", res.data);
+      console.log("response by id", res.data);
       if (res.data.status) {
         dispatch(getSingleProductsSuccess(res.data.data));
       } else {
         dispatch(productsError());
       }
+      return { status: res.data.status };
     } catch (err) {
       console.log(err);
       dispatch(productsError());

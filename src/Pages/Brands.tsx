@@ -50,7 +50,9 @@ type prodProps = {
   brand: string;
   price: number;
   title: string;
+  to: string;
 };
+
 const men_arrival: prodProps[] = [
   {
     id: 1,
@@ -58,6 +60,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Bare Denim",
     price: 899,
+    to: "/men",
   },
   {
     id: 2,
@@ -65,6 +68,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Blue Jeans",
     price: 899,
+    to: "/men",
   },
   {
     id: 3,
@@ -72,6 +76,7 @@ const men_arrival: prodProps[] = [
     brand: "Ajile",
     title: "T Shirt",
     price: 349,
+    to: "/men",
   },
   {
     id: 4,
@@ -79,6 +84,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Shirt",
     price: 1199,
+    to: "/men",
   },
   {
     id: 5,
@@ -86,6 +92,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Blue Jeans",
     price: 899,
+    to: "/men",
   },
   {
     id: 6,
@@ -93,6 +100,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Shirt & Trouser",
     price: 999,
+    to: "/men",
   },
   {
     id: 7,
@@ -100,6 +108,7 @@ const men_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Waiste Coat",
     price: 849,
+    to: "/men",
   },
 ];
 const wommen_arrival: prodProps[] = [
@@ -109,6 +118,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Rangmanch",
     title: "Kurta",
     price: 1899,
+    to: "/women",
   },
   {
     id: 2,
@@ -116,6 +126,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Rangmanch",
     title: "Print Kurta",
     price: 1599,
+    to: "/women",
   },
   {
     id: 3,
@@ -123,6 +134,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Mauve Kurta",
     price: 349,
+    to: "/women",
   },
   {
     id: 4,
@@ -130,6 +142,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Lilac Kurta",
     price: 1899,
+    to: "/women",
   },
   {
     id: 5,
@@ -137,6 +150,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Sea Blue Kurta",
     price: 1799,
+    to: "/women",
   },
   {
     id: 6,
@@ -144,6 +158,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Kurta",
     price: 1799,
+    to: "/women",
   },
   {
     id: 7,
@@ -151,6 +166,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Pantaloons",
     title: "Kurta Pants",
     price: 1999,
+    to: "/women",
   },
   {
     id: 8,
@@ -158,6 +174,7 @@ const wommen_arrival: prodProps[] = [
     brand: "Bare Denim",
     title: "Off-white Jeans",
     price: 1899,
+    to: "/women",
   },
 ];
 const kids_arrival: prodProps[] = [
@@ -167,6 +184,7 @@ const kids_arrival: prodProps[] = [
     brand: "Pantaloons Junior",
     title: "Blouse",
     price: 454,
+    to: "/kids",
   },
   {
     id: 2,
@@ -174,6 +192,7 @@ const kids_arrival: prodProps[] = [
     brand: "Pantaloons Junior",
     title: "Blouse",
     price: 419,
+    to: "/kids",
   },
   {
     id: 3,
@@ -181,6 +200,7 @@ const kids_arrival: prodProps[] = [
     brand: "Pantaloons Junior",
     title: "Frock",
     price: 839,
+    to: "/kids",
   },
   {
     id: 4,
@@ -188,6 +208,7 @@ const kids_arrival: prodProps[] = [
     brand: "Mini Klub",
     title: "Medium Blue T-Shirt",
     price: 509,
+    to: "/kids",
   },
   {
     id: 5,
@@ -195,6 +216,7 @@ const kids_arrival: prodProps[] = [
     brand: "Indus Route",
     title: "SPink Kurta Pyjama Set",
     price: 562,
+    to: "/kids",
   },
   {
     id: 6,
@@ -202,6 +224,7 @@ const kids_arrival: prodProps[] = [
     brand: "Pantaloons Jr.",
     title: "Shorts",
     price: 398,
+    to: "/kids",
   },
   {
     id: 7,
@@ -209,29 +232,34 @@ const kids_arrival: prodProps[] = [
     brand: "Pantaloons Jr.",
     title: "Leggings",
     price: 398,
+    to: "/kids",
   },
 ];
 
-const trendings: { id: number; img: string; title: string }[] = [
+const trendings: { id: number; img: string; title: string; to: string }[] = [
   {
     id: 1,
     title: "Men",
     img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/men/SS23-2.jpg.transform/i296x300/image.jpeg",
+    to: "/men",
   },
   {
     id: 2,
     title: "Women",
     img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/women/CoordSets.jpg.transform/i296x300/image.jpeg",
+    to: "/women",
   },
   {
     id: 3,
     title: "Kids",
     img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/kids/SS23-2.jpg.transform/i296x300/image.jpeg",
+    to: "/kids",
   },
   {
     id: 4,
     title: "Accessories",
     img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/acc/acc/ToteBags.jpg.transform/i296x300/image.jpeg",
+    to: "/accessories",
   },
 ];
 const Brands = () => {
@@ -264,7 +292,7 @@ const Brands = () => {
                 width={{ base: "90%", sm: "70%", md: "100%", lg: "100%" }}
                 m="auto"
               >
-                <Link to="#">
+                <Link to={el.to}>
                   <RoundCards title={el.title} img={el.img} />
                 </Link>
               </Box>

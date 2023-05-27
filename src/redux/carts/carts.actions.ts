@@ -132,7 +132,7 @@ export const deleteCartAllApi =
       } else {
         dispatch(cartProductsError());
       }
-      return { status: res.data.status, mssg: res.data.mssg };
+      return { status: res.data.status };
     } catch (err) {
       console.log(err);
       dispatch(cartProductsError());

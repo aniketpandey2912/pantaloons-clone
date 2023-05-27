@@ -11,6 +11,7 @@ import {
 import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { Link } from "react-router-dom";
 
 type Props = {
   images: {
@@ -19,6 +20,7 @@ type Props = {
     brand: string;
     title: string;
     price: number;
+    to: string;
   }[];
 };
 
@@ -52,6 +54,7 @@ const MultiCaraousel = ({ images }: Props) => {
           BRAND={el.brand}
           TITLE={el.title}
           PRICE={el.price}
+          to={el.to}
         />
       ))}
     </Carousel>
@@ -65,38 +68,42 @@ const ProductSimple = ({
   BRAND,
   TITLE,
   PRICE,
+  to,
 }: {
   IMAGE: string;
   BRAND: string;
   TITLE: string;
   PRICE: number;
+  to: string;
 }) => {
   return (
     <Center>
-      <Card maxW="sm">
-        <CardBody>
-          <Image
-            src={IMAGE}
-            alt="Green double couch with wooden legs"
-            borderRadius="lg"
-            w={{ base: "220px", sm: "200px", md: "220px", lg: "250px" }}
-            h={{ base: "250px", sm: "200px", md: "280px", lg: "300px" }}
-          />
-          <Stack mt="2" spacing="3">
-            <Heading size="md">{BRAND}</Heading>
-            <Text>{TITLE}</Text>
-            <Text color="teal.600" fontSize="xl">
-              Rs.{PRICE}{" "}
-              <span
-                style={{ textDecoration: "line-through", fontSize: "14px" }}
-              >
-                Rs. {Math.floor(PRICE + Math.random() * 1000)}
-              </span>
-            </Text>
-          </Stack>
-        </CardBody>
-        <Divider />
-      </Card>
+      <Link to={to}>
+        <Card maxW="sm">
+          <CardBody>
+            <Image
+              src={IMAGE}
+              alt="Green double couch with wooden legs"
+              borderRadius="lg"
+              w={{ base: "220px", sm: "200px", md: "220px", lg: "250px" }}
+              h={{ base: "250px", sm: "200px", md: "280px", lg: "300px" }}
+            />
+            <Stack mt="2" spacing="3">
+              <Heading size="md">{BRAND}</Heading>
+              <Text>{TITLE}</Text>
+              <Text color="teal.600" fontSize="xl">
+                Rs.{PRICE}{" "}
+                <span
+                  style={{ textDecoration: "line-through", fontSize: "14px" }}
+                >
+                  Rs. {Math.floor(PRICE + Math.random() * 1000)}
+                </span>
+              </Text>
+            </Stack>
+          </CardBody>
+          <Divider />
+        </Card>
+      </Link>
     </Center>
   );
 };

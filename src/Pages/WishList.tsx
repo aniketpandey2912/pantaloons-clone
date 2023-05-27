@@ -3,15 +3,10 @@ import { useAppDispatch, useAppSelector } from "../redux/store";
 import EmptyWishlist from "../components/EmptyWishlist";
 import { Box, Flex, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { getCartProductsApi } from "../redux/carts/carts.actions";
-import CartSkeleton from "../components/CartSkeleton";
-import CartProductCard from "../components/CartProductCard";
-import CartDetails from "../components/CartDetails";
 import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
 
-type Props = {};
-
-const WishList = (props: Props) => {
+const WishList = () => {
   const { data, loading } = useAppSelector((store) => store.cartManager);
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();

@@ -30,33 +30,33 @@ const rectangle_images: { id: number | string; img: string; title: string }[] =
   [
     {
       id: 101,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/Spring-Women-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Spring'23 Collection",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-SummerCollection-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "Summer '23 Edit",
     },
     {
       id: 102,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/Beauty-Women-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Beauty",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-OnlineExclusives-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "Online Exclusive",
     },
     {
       id: 103,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/women/Denims-Women-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Denims",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-Tshirts-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "T-Shirts",
     },
     {
       id: 104,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/women/Women-OnlineOnly-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Online Exclusives",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-Shorts-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "Shorts",
     },
     {
       id: 105,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/women/Kurtas-Women-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Kurta & Sets",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-Denims-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "Denims",
     },
     {
       id: 106,
-      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/refresh/march23/thumbnail/women/Tops-Women-Thumbnail.jpg.transform/i207x146/image.jpeg",
-      title: "Tees & Tops",
+      img: "https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/categorypage/fy-2023-2024/may-2023/week-4/thumbnail/men/Mens-Shirts-Thumbnail.jpg.transform/i207x146/image.jpeg",
+      title: "Shirts & Trousers",
     },
   ];
 
