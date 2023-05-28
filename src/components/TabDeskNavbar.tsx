@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Flex,
-  Icon,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Flex, Icon, Image, Text } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 import Search from "./Search";
 
@@ -670,12 +662,12 @@ const menu: navMenuProps[] = [
 // Main component
 const TabDeskNavbar = () => {
   const { token } = useAppSelector((store) => store.authManager);
-  const { data } = useAppSelector((store) => store.cartManager);
+  // const { data } = useAppSelector((store) => store.cartManager);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getCartProductsApi(token));
-  }, []);
+  }, [token, dispatch]);
 
   return (
     <Flex

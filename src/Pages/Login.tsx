@@ -65,7 +65,7 @@ const Login = () => {
 
   return (
     <Stack mx={"auto"} maxW={"lg"} px={6}>
-      <Stack align={"center"} bgColor="rgb(57, 204, 204)">
+      <Stack align={"center"} bgColor="rgb(57, 204, 204)" color={"gray.600"}>
         <Heading fontSize={{ base: "2xl", md: "4xl" }} textAlign={"center"}>
           Login
         </Heading>

@@ -13,13 +13,16 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log(token);
     dispatch(getCartProductsApi(token)).then(() => {
       // console.log(data);
     });
   }, [dispatch, token]);
+
+  console.log(loading);
   return (
     <Box w="100%" py="50px">
-      {loading === false && data?.length === 0 && <EmptyCart />}
+      {data?.length === 0 && <EmptyCart />}
 
       {data.length && (
         <Flex

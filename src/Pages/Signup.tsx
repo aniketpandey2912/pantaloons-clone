@@ -48,23 +48,24 @@ const Signup = () => {
     if (validation(formData)) {
       console.log(formData);
       dispatch(signupApi({ ...formData })).then((res: any) => {
+        console.log("res:", res);
         toast({
           title: res.mssg,
           status: res.status ? "success" : "error",
           duration: 3000,
           isClosable: true,
-          position: "top",
+          // position: "top",
         });
         if (res.status) {
           navigate("/login");
         }
       });
-      toast({
-        title: "Sign up sucessful.",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
+      // toast({
+      //   title: "Sign up sucessful.",
+      //   status: "success",
+      //   duration: 9000,
+      //   isClosable: true,
+      // });
     } else {
       toast({
         title: "All fields are required",
@@ -77,7 +78,7 @@ const Signup = () => {
 
   return (
     <Stack mx={"auto"} maxW={"lg"} px={6}>
-      <Stack align={"center"} bgColor="rgb(57, 204, 204)">
+      <Stack align={"center"} bgColor="rgb(57, 204, 204)" color={"gray.600"}>
         <Heading fontSize={{ base: "2xl", md: "4xl" }} textAlign={"center"}>
           Sign up
         </Heading>

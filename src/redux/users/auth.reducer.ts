@@ -46,22 +46,29 @@ export const authReducer = (
       };
     }
 
-    case types.AUTH_SUCCESS: {
+    case types.AUTH_LOGIN_SUCCESS: {
       localStorage.setItem("token", payload.token);
       localStorage.setItem("user", JSON.stringify(payload.user));
       // console.log(payload.user);
       return {
         ...state,
         isLoading: false,
-        token: payload,
+        token: payload.token,
         user: payload.user,
+      };
+    }
+
+    case types.AUTH_SINGUP_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
       };
     }
 
     case types.LOGOUT_SUCCESS: {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      return { ...initState };
+      return { ...initState, token: "" };
     }
 
     default:

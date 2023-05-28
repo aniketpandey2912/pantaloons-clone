@@ -19,7 +19,7 @@ const deleteCartAllSuccess = () => ({ type: types.CART_DELETE_ALL_SUCCESS });
 export const getCartProductsApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(cartProductsLoading());
-    console.log(token);
+    console.log("token", token);
     try {
       let res = await axios.get(`${url}/cart/getcart`, {
         headers: {
