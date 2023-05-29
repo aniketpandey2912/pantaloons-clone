@@ -20,9 +20,9 @@ const WishList = () => {
     <Box w="100%" py="50px">
       {loading === false && data?.length === 0 && <EmptyWishlist />}
 
-      {data.length && (
+      {data.length !== 0 && (
         <>
-          <VStack>
+          <VStack border="1px solid red">
             <Heading fontStyle={"italic"} fontWeight="none" fontSize="24px">
               MY WHISTLIST
             </Heading>

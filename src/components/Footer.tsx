@@ -153,7 +153,7 @@ const Footer = () => {
   const [join, setJoin] = React.useState<boolean>(false);
   const handleClick = () => setJoin(!join);
   return (
-    <Box w="100%" py="100px">
+    <Box border="0px solid red" w="100%" mt="100px">
       {/* Join */}
       <Flex
         flexDir={{ base: "column", md: "row" }}

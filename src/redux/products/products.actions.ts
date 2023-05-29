@@ -25,7 +25,7 @@ export const getProductsApi =
     // console.log(`${url}/${path}`);
     try {
       let res = await axios.get(`${url}/${path}`);
-      console.log("response", res.data.data);
+      // console.log("response", res.data.data);
       if (res.data.status) {
         dispatch(getProductsSuccess(res.data.data));
       } else {
@@ -41,7 +41,7 @@ export const getProductsByIDApi =
   (prodID: string) => async (dispatch: AppDispatch) => {
     dispatch(productsLoading());
     // console.log(prodID);
-    console.log(`${url}/products/allproducts/${prodID}`);
+    // console.log(`${url}/products/allproducts/${prodID}`);
     try {
       let res = await axios.get(`${url}/products/allproducts/${prodID}`);
       console.log("response by id", res.data);

@@ -10,7 +10,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import MultiCaraousel from "../components/MultiCaraousel";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import RoundCards from "../components/RoundCards";
 
 const home_images: { id: number | string; img: string }[] = [
@@ -264,6 +264,7 @@ const trendings: { id: number; img: string; title: string; to: string }[] = [
 ];
 
 const Home = () => {
+  const navigate = useNavigate();
   // shop the look
   const [text, setText] = useState<string>("Women");
 
@@ -420,61 +421,79 @@ const Home = () => {
             </Flex>
           </Flex>
           {text === "Women" && (
-            <Flex justifyContent="space-between" alignItems="center" mt="20px">
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Pink%20Romance-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Summer%20Swirl-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Glam%20Gal-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-            </Flex>
+            <Link to="/women">
+              <Flex
+                justifyContent="space-between"
+                alignItems="center"
+                mt="20px"
+              >
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Pink%20Romance-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Summer%20Swirl-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/women-western/Glam%20Gal-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+              </Flex>
+            </Link>
           )}
           {text === "Men" && (
-            <Flex justifyContent="space-between" alignItems="center" my="20px">
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/Sunny%20Days%20Fav-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/The%20Indigo%20Edit-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/Cool%20Comfort-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-            </Flex>
+            <Link to="/men">
+              <Flex
+                justifyContent="space-between"
+                alignItems="center"
+                my="20px"
+              >
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/Sunny%20Days%20Fav-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/The%20Indigo%20Edit-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/mens/Cool%20Comfort-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+              </Flex>
+            </Link>
           )}
           {text === "Kids" && (
-            <Flex justifyContent="space-between" alignItems="center" my="20px">
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Outdoor%20Play-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Candy%20Crush-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-              <Image
-                src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Playful%20Vibes-D.jpg.transform/i439x600/image.jpeg"
-                w="30%"
-                h="50%"
-              />
-            </Flex>
+            <Link to="/kids">
+              <Flex
+                justifyContent="space-between"
+                alignItems="center"
+                my="20px"
+              >
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Outdoor%20Play-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Candy%20Crush-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+                <Image
+                  src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/kids/Playful%20Vibes-D.jpg.transform/i439x600/image.jpeg"
+                  w="30%"
+                  h="50%"
+                />
+              </Flex>
+            </Link>
           )}
           {text === "Ethnic Wear" && (
             <Flex justifyContent="space-between" alignItems="center" my="20px">
@@ -482,16 +501,22 @@ const Home = () => {
                 src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/ethnic/Rangmanch-D.jpg.transform/i439x600/image.jpeg"
                 w="30%"
                 h="50%"
+                cursor="pointer"
+                onClick={() => navigate("/women")}
               />
               <Image
                 src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/ethnic/Ethnic%20Mode%20On-D.jpg.transform/i439x600/image.jpeg"
                 w="30%"
                 h="50%"
+                cursor="pointer"
+                onClick={() => navigate("/kids")}
               />
               <Image
                 src="https://publish-p33712-e119997.adobeaemcloud.com/content/dam/adityabirlafashionandretailprogram/homepage/fy-2023-2024/may-2023/shop-the-look-/ethnic/Casual%20Classics-D.jpg.transform/i439x600/image.jpeg"
                 w="30%"
                 h="50%"
+                cursor="pointer"
+                onClick={() => navigate("/men")}
               />
             </Flex>
           )}

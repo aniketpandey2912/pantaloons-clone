@@ -13,18 +13,16 @@ const Cart = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log(token);
     dispatch(getCartProductsApi(token)).then(() => {
       // console.log(data);
     });
   }, [dispatch, token]);
 
-  console.log(loading);
   return (
     <Box w="100%" py="50px">
       {data?.length === 0 && <EmptyCart />}
 
-      {data.length && (
+      {data.length !== 0 && (
         <Flex
           border="0px solid green"
           w={{ base: "95%", sm: "95%", md: "95%", lg: "80%", xl: "70%" }}

@@ -30,7 +30,7 @@ export const signupApi = (user: userType) => async (dispatch: Dispatch) => {
 
   try {
     let res: AxiosResponse = await axios.post(`${url}/users/signup`, user);
-    console.log(res.data);
+    // console.log(res.data);
     if (res.data.status) {
       dispatch(authSignupSuccess());
     } else {
@@ -46,13 +46,13 @@ export const signupApi = (user: userType) => async (dispatch: Dispatch) => {
 export const loginApi =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
     dispatch(authLoading());
-    console.log(email, password, url);
+    // console.log(email, password, url);
     try {
       let res: AxiosResponse = await axios.post(`${url}/users/login`, {
         email,
         password,
       });
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.status) {
         dispatch(
           authLoginSuccess({ token: res.data.token, user: res.data.data })
