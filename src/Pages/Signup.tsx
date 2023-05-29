@@ -54,18 +54,11 @@ const Signup = () => {
           status: res.status ? "success" : "error",
           duration: 3000,
           isClosable: true,
-          // position: "top",
         });
         if (res.status) {
           navigate("/login");
         }
       });
-      // toast({
-      //   title: "Sign up sucessful.",
-      //   status: "success",
-      //   duration: 9000,
-      //   isClosable: true,
-      // });
     } else {
       toast({
         title: "All fields are required",
