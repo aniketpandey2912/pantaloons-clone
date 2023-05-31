@@ -38,6 +38,10 @@ const UserAccount = () => {
     setFromData({ ...formData, [name]: value });
   };
 
+  const handleOpenFiles = () => {
+    console.log("Open files");
+  };
+
   return (
     <Flex
       w="100%"
@@ -75,6 +79,7 @@ const UserAccount = () => {
                   colorScheme="red"
                   aria-label="remove Image"
                   icon={<EditIcon />}
+                  onClick={handleOpenFiles}
                 />
               </Avatar>
             </Center>
