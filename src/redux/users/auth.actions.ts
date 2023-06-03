@@ -22,6 +22,11 @@ const authSignupSuccess = (): actionType => ({
   type: types.AUTH_SINGUP_SUCCESS,
 });
 
+const updateUserSuccess = (payload: userType): actionType => ({
+  type: types.UPDATE_USER_SUCCESS,
+  payload,
+});
+
 const logoutSuccess = (): actionType => ({ type: types.LOGOUT_SUCCESS });
 
 // APIs
@@ -52,6 +57,28 @@ export const loginApi =
         email,
         password,
       });
+      // console.log(res.data);
+      if (res.data.status) {
+        dispatch(
+          authLoginSuccess({ token: res.data.token, user: res.data.data })
+        );
+      } else {
+        dispatch(authError());
+      }
+      return res.data;
+    } catch (err) {
+      dispatch(authError());
+      console.log(err);
+    }
+  };
+
+export const updateUserInfoAPI =
+  (email: string, password: string, updates: any) =>
+  async (dispatch: AppDispatch) => {
+    dispatch(authLoading());
+    // console.log(email, password, url);
+    try {
+      let res: AxiosResponse = await axios.post(`${url}/users/editinfo`,updates);
       // console.log(res.data);
       if (res.data.status) {
         dispatch(

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Heading,
   Button,
@@ -18,6 +18,7 @@ import {
 import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useAppSelector } from "../redux/store";
+import axios from "axios";
 
 const UserAccount = () => {
   const { user } = useAppSelector((store) => store.authManager);
@@ -33,6 +34,8 @@ const UserAccount = () => {
   const [formData, setFromData] = useState(initState);
   const [edit, setEdit] = useState<boolean>(true);
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
     setFromData({ ...formData, [name]: value });
@@ -40,6 +43,34 @@ const UserAccount = () => {
 
   const handleOpenFiles = () => {
     console.log("Open files");
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      // console.log("Selected file:", file);
+      const formImgData = new FormData();
+      formImgData.append("file", file);
+      formImgData.append("upload_preset", "ao8hjn9o");
+      uploadImage(formImgData);
+    }
+  };
+
+  const uploadImage = (formImgData: any) => {
+    axios
+      .post(
+        "https://api.cloudinary.com/v1_1/dgwuo2wpw/image/upload",
+        formImgData
+      )
+      .then((res) => {
+        console.log(res);
+        formData.avatar = res.data.url;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -72,7 +103,8 @@ const UserAccount = () => {
             <Center>
               <Avatar size="xl" src={user.avatar}>
                 <AvatarBadge
-                  as={IconButton}
+                  isDisabled={edit}
+                  as={IconButton} // controlling profile picture edit
                   size="sm"
                   rounded="full"
                   // top="-10px"
@@ -82,6 +114,13 @@ const UserAccount = () => {
                   onClick={handleOpenFiles}
                 />
               </Avatar>
+              {/* input-hidden, controlled by edit button */}
+              <Input
+                type="file"
+                display="none"
+                ref={fileInputRef}
+                onChange={(e) => handleFileChange(e)}
+              />
             </Center>
           </Stack>
         </FormControl>
@@ -158,7 +197,7 @@ const UserAccount = () => {
               bg: "blue.500",
             }}
           >
-            Submit
+            Save Changes
           </Button>
         </Stack>
       </Stack>
