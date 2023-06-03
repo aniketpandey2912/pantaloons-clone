@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Heading,
   Button,
@@ -14,14 +14,18 @@ import {
   Center,
   Text,
   Box,
+  useToast,
 } from "@chakra-ui/react";
 import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
-import { useAppSelector } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import axios from "axios";
+import { getUserInfoAPI, updateUserInfoAPI } from "../redux/users/auth.actions";
 
 const UserAccount = () => {
-  const { user } = useAppSelector((store) => store.authManager);
+  const { user, token } = useAppSelector((store) => store.authManager);
+  const dispatch = useAppDispatch();
+  const toast = useToast();
   const initState = {
     avatar: user.avatar,
     first_name: user.first_name,
@@ -33,6 +37,7 @@ const UserAccount = () => {
 
   const [formData, setFromData] = useState(initState);
   const [edit, setEdit] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -62,16 +67,40 @@ const UserAccount = () => {
     axios
       .post(
         "https://api.cloudinary.com/v1_1/dgwuo2wpw/image/upload",
-        formImgData
+        formImgData,
+        {
+          headers: token,
+        }
       )
       .then((res) => {
         console.log(res);
         formData.avatar = res.data.url;
+        console.log("imag uploaded:", formData);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const updateUserInfo = (updates: any) => {
+    setLoading(true);
+    dispatch(updateUserInfoAPI(token, formData))
+      .then((res: any) => {
+        toast({
+          title: res.mssg,
+          status: res.status ? "success" : "error",
+          duration: 3000,
+          isClosable: true,
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    dispatch(getUserInfoAPI(token));
+  }, [dispatch, token]);
 
   return (
     <Flex
@@ -190,12 +219,14 @@ const UserAccount = () => {
           </Button>
           <Button
             isDisabled={edit}
+            isLoading={loading}
             bg={"blue.400"}
             color={"white"}
             w="full"
             _hover={{
               bg: "blue.500",
             }}
+            onClick={updateUserInfo}
           >
             Save Changes
           </Button>

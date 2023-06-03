@@ -7,3 +7,4 @@ export const LOGOUT_SUCCESS: string = "auth/logout/success";
 
 // users info
 export const UPDATE_USER_SUCCESS = "user/info/upadate";
+export const GET_USER_INFO_SUCCESS = "user/info/get";

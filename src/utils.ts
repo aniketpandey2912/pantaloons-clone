@@ -6,4 +6,4 @@ export const validation = (data: any): boolean => {
   return true;
 };
 
-export const url = process.env.REACT_APP_URL2;
+export const url = process.env.REACT_APP_URL1;

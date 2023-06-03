@@ -16,7 +16,7 @@ const authLoading = (): actionType => ({
 const authError = (): actionType => ({ type: types.AUTH_ERROR });
 const authLoginSuccess = (payload?: any): actionType => ({
   type: types.AUTH_LOGIN_SUCCESS,
-  payload: payload,
+  payload,
 });
 const authSignupSuccess = (): actionType => ({
   type: types.AUTH_SINGUP_SUCCESS,
@@ -24,6 +24,11 @@ const authSignupSuccess = (): actionType => ({
 
 const updateUserSuccess = (payload: userType): actionType => ({
   type: types.UPDATE_USER_SUCCESS,
+  payload,
+});
+
+const getUserInfoSuccess = (payload?: any): actionType => ({
+  type: types.GET_USER_INFO_SUCCESS,
   payload,
 });
 
@@ -73,16 +78,44 @@ export const loginApi =
   };
 
 export const updateUserInfoAPI =
-  (email: string, password: string, updates: any) =>
-  async (dispatch: AppDispatch) => {
+  (token: string, updates: any) => async (dispatch: AppDispatch) => {
     dispatch(authLoading());
-    // console.log(email, password, url);
+    console.log("updates", updates);
     try {
-      let res: AxiosResponse = await axios.post(`${url}/users/editinfo`,updates);
-      // console.log(res.data);
+      let res: AxiosResponse = await axios.patch(
+        `${url}/users/editinfo`,
+        updates,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      console.log(res.data);
+      if (res.data.status) {
+        dispatch(updateUserSuccess(updates));
+      } else {
+        dispatch(authError());
+      }
+      return res.data;
+    } catch (err) {
+      dispatch(authError());
+      console.log(err);
+    }
+  };
+export const getUserInfoAPI =
+  (token: string) => async (dispatch: AppDispatch) => {
+    dispatch(authLoading());
+    try {
+      let res: AxiosResponse = await axios.get(`${url}/users/getinfo`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      console.log(res.data);
       if (res.data.status) {
         dispatch(
-          authLoginSuccess({ token: res.data.token, user: res.data.data })
+          getUserInfoSuccess({ token: res.data.token, user: res.data.data })
         );
       } else {
         dispatch(authError());
