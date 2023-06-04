@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Heading,
   Button,
@@ -20,7 +20,7 @@ import { EditIcon } from "@chakra-ui/icons";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import axios from "axios";
-import { getUserInfoAPI, updateUserInfoAPI } from "../redux/users/auth.actions";
+import { updateUserInfoAPI } from "../redux/users/auth.actions";
 
 const UserAccount = () => {
   const { user, token } = useAppSelector((store) => store.authManager);
@@ -35,7 +35,7 @@ const UserAccount = () => {
     mobile: user.mobile,
   };
 
-  const [formData, setFromData] = useState(initState);
+  const [formData, setFormData] = useState(initState);
   const [edit, setEdit] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -43,7 +43,7 @@ const UserAccount = () => {
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { name, value } = e.target;
-    setFromData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleOpenFiles = () => {
@@ -74,8 +74,8 @@ const UserAccount = () => {
       )
       .then((res) => {
         console.log(res);
-        formData.avatar = res.data.url;
-        console.log("imag uploaded:", formData);
+        setFormData({ ...formData, avatar: res.data.url });
+        console.log("imag uploaded:", formData.avatar);
       })
       .catch((err) => {
         console.log(err);
@@ -95,12 +95,9 @@ const UserAccount = () => {
       })
       .finally(() => {
         setLoading(false);
+        setEdit(false);
       });
   };
-
-  useEffect(() => {
-    dispatch(getUserInfoAPI(token));
-  }, [dispatch, token]);
 
   return (
     <Flex
@@ -130,7 +127,7 @@ const UserAccount = () => {
         <FormControl id="userName">
           <Stack direction={["column", "row"]} spacing={6}>
             <Center>
-              <Avatar size="xl" src={user.avatar}>
+              <Avatar size="xl" src={formData.avatar || user.avatar}>
                 <AvatarBadge
                   isDisabled={edit}
                   as={IconButton} // controlling profile picture edit

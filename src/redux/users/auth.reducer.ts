@@ -47,9 +47,9 @@ export const authReducer = (
     }
 
     case types.AUTH_LOGIN_SUCCESS || types.GET_USER_INFO_SUCCESS: {
+      console.log("reducer:", payload);
       localStorage.setItem("token", payload.token);
       localStorage.setItem("user", JSON.stringify(payload.user));
-      // console.log(payload.user);
       return {
         ...state,
         isLoading: false,
@@ -66,12 +66,12 @@ export const authReducer = (
     }
 
     case types.UPDATE_USER_SUCCESS: {
-      localStorage.setItem("user", JSON.stringify({ ...state.user, payload }));
-      // console.log(payload);
+      localStorage.setItem("user", JSON.stringify({ ...state.user, ...payload }));
+      console.log("reducer:", payload);
       return {
         ...state,
         isLoading: false,
-        user: { ...state.user, payload },
+        user: { ...state.user, ...payload },
       };
     }
 
