@@ -17,6 +17,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addCartProductsApi } from "../redux/carts/carts.actions";
 import { Link } from "react-router-dom";
+import { MdSettings } from "react-icons/md";
 
 interface RatingProps {
   rating: number;
@@ -104,13 +105,14 @@ function ProductCard({ ...prod }: any) {
         position="relative"
       >
         {data.isNew && (
-          <Circle
-            size="10px"
-            position="absolute"
-            top={2}
-            right={2}
-            bg="red.200"
-          />
+          // <Circle
+          //   size="10px"
+          //   position="absolute"
+          //   top={2}
+          //   right={2}
+          //   bg="red.200"
+          // />
+          <Icon as={MdSettings} pos="absolute" top="10%" />
         )}
 
         <Link to={`/productdetailings/${id}`}>

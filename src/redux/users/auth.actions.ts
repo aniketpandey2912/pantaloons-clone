@@ -80,7 +80,7 @@ export const loginApi =
 export const updateUserInfoAPI =
   (token: string, updates: any) => async (dispatch: AppDispatch) => {
     dispatch(authLoading());
-    console.log("updates", updates);
+    // console.log("updates", updates);
     try {
       let res: AxiosResponse = await axios.patch(
         `${url}/users/editinfo`,
@@ -91,7 +91,7 @@ export const updateUserInfoAPI =
           },
         }
       );
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.status) {
         dispatch(updateUserSuccess(updates));
       } else {
@@ -112,7 +112,7 @@ export const getUserInfoAPI =
           authorization: token,
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.status) {
         dispatch(
           getUserInfoSuccess({ token: res.data.token, user: res.data.data })
