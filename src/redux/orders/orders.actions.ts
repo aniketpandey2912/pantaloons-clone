@@ -22,16 +22,16 @@ const addOrdersSuccess = (payload: OrderProps) => ({
 export const getOrdersApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(ordersLoading());
-    console.log(token);
+    // console.log(token);
     try {
       let res = await axios.get(`${url}/orders/getmyorders`, {
         headers: {
           Authorization: token,
         },
       });
-      // console.log("response", res.data.data);
+      // console.log("response", res.data);
       if (res.data.status) {
-        dispatch(getOrdersSuccess(res.data.data));
+        dispatch(getOrdersSuccess(res.data.orders));
       } else {
         dispatch(ordersError());
       }

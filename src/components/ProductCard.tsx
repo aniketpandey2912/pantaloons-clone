@@ -116,7 +116,6 @@ function ProductCard({ ...prod }: any) {
       });
     });
   };
-  console.log(prod);
 
   return (
     <Flex

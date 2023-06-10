@@ -27,7 +27,7 @@ const removeWishlistOneProductSuccess = (prodID: string) => ({
 export const getWishlistProductsApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(wishlistProductsLoading());
-    console.log(token);
+    // console.log(token);
     try {
       let res = await axios.get(`${url}/wishlist/getwishlist`, {
         headers: {
