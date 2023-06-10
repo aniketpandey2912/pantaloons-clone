@@ -30,6 +30,14 @@ export const wishlistReducer = (
       return { ...state, loading: false, data: payload };
     }
 
+    case types.WISHLIST_REMOVE_ONE_PRODUCT_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        data: state.data.filter((prod) => prod._id !== payload),
+      };
+    }
+
     case types.WISHLIST_DELETE_ALL_SUCCESS: {
       return { ...initState };
     }

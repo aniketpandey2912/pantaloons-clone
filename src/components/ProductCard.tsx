@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Flex,
-  Circle,
   Box,
   Image,
   Badge,
@@ -17,7 +16,11 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import { addCartProductsApi } from "../redux/carts/carts.actions";
 import { Link } from "react-router-dom";
-import { MdSettings } from "react-icons/md";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import {
+  addWishlistProductsApi,
+  deleteWishlistProductsApi,
+} from "../redux/wishlist/wishtlist.actions";
 
 interface RatingProps {
   rating: number;
@@ -65,7 +68,7 @@ function ProductCard({ ...prod }: any) {
 
   const handleAddToCart = () => {
     dispatch(addCartProductsApi(prod, token)).then((res: any) => {
-      console.log(res.status);
+      // console.log(res.status);
       if (res.status) {
         toast({
           title: "Added To Cart",
@@ -86,6 +89,34 @@ function ProductCard({ ...prod }: any) {
       }
     });
   };
+  const handleAddToWishlist = () => {
+    dispatch(addWishlistProductsApi(prod, token)).then((res: any) => {
+      console.log(res.status);
+      toast({
+        title: res.mssg,
+        status: res.status ? "success" : "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+        colorScheme: res.status ? "teal" : "red",
+      });
+    });
+  };
+
+  const handleRemoveFromWishlist = () => {
+    dispatch(deleteWishlistProductsApi(prod._id, token)).then((res: any) => {
+      console.log(res.status);
+      toast({
+        title: res.mssg,
+        status: res.status ? "success" : "error",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+        colorScheme: res.status ? "teal" : "red",
+      });
+    });
+  };
+  console.log(prod);
 
   return (
     <Flex
@@ -105,14 +136,18 @@ function ProductCard({ ...prod }: any) {
         position="relative"
       >
         {data.isNew && (
-          // <Circle
-          //   size="10px"
-          //   position="absolute"
-          //   top={2}
-          //   right={2}
-          //   bg="red.200"
-          // />
-          <Icon as={MdSettings} pos="absolute" top="10%" />
+          <Icon
+            as={prod.heartColor === "black" ? AiFillHeart : AiOutlineHeart}
+            size="10px"
+            position="absolute"
+            top={2}
+            right={2}
+            onClick={
+              prod.heartColor === "black"
+                ? handleRemoveFromWishlist
+                : handleAddToWishlist
+            }
+          />
         )}
 
         <Link to={`/productdetailings/${id}`}>

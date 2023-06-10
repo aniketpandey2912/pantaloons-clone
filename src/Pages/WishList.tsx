@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 import EmptyWishlist from "../components/EmptyWishlist";
 import { Box, Flex, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/react";
-import { getCartProductsApi } from "../redux/carts/carts.actions";
 import ProductCard from "../components/ProductCard";
 import ProductSkeleton from "../components/ProductSkeleton";
+import { getWishlistProductsApi } from "../redux/wishlist/wishtlist.actions";
 
 const WishList = () => {
-  const { data, loading } = useAppSelector((store) => store.cartManager);
+  const { data, loading } = useAppSelector((store) => store.wishlistManager);
   const { token } = useAppSelector((store) => store.authManager);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCartProductsApi(token)).then(() => {
+    dispatch(getWishlistProductsApi(token)).then(() => {
       // console.log(data);
     });
   }, [dispatch, token]);
@@ -48,7 +48,7 @@ const WishList = () => {
               >
                 {data?.map((el: any) => (
                   <Box key={el._id}>
-                    <ProductCard {...el} />
+                    <ProductCard {...el} heartColor="black" />
                   </Box>
                 ))}
               </SimpleGrid>

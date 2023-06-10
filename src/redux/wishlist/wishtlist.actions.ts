@@ -18,14 +18,18 @@ const getWishlistProductsSuccess = (payload: ProductProps[]) => ({
 const deleteWishlistAllSuccess = () => ({
   type: types.WISHLIST_DELETE_ALL_SUCCESS,
 });
+const removeWishlistOneProductSuccess = (prodID: string) => ({
+  type: types.WISHLIST_REMOVE_ONE_PRODUCT_SUCCESS,
+  payload: prodID,
+});
 
 // APIs
-export const getCartProductsApi =
+export const getWishlistProductsApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(wishlistProductsLoading());
     console.log(token);
     try {
-      let res = await axios.get(`${url}/cart/getcart`, {
+      let res = await axios.get(`${url}/wishlist/getwishlist`, {
         headers: {
           Authorization: token,
         },
@@ -41,14 +45,14 @@ export const getCartProductsApi =
       dispatch(wishlistProductsError());
     }
   };
-export const addCartProductsApi =
+export const addWishlistProductsApi =
   (product: ProductProps | CartProductProps, token: string) =>
   async (dispatch: AppDispatch) => {
     dispatch(wishlistProductsLoading());
     // console.log(`${url}/${path}`);
     try {
       let res = await axios.post(
-        `${url}/cart/addtocart`,
+        `${url}/wishlist/addtowishlist`,
         { prod: product },
         {
           headers: {
@@ -56,76 +60,51 @@ export const addCartProductsApi =
           },
         }
       );
-      // console.log("response", res.data.data);
-      if (res.data.status) {
-        return { status: true };
-      } else {
+      console.log("response", res.data);
+      if (res.data.status === false) {
         dispatch(wishlistProductsError());
       }
+      return res.data;
     } catch (err) {
       console.log(err);
       dispatch(wishlistProductsError());
+      return { status: false, mssg: "Something went wrong" };
     }
   };
 
-export const decreaseQtyCartProductsApi =
-  (product: ProductProps | CartProductProps, token: string) =>
-  async (dispatch: AppDispatch) => {
-    dispatch(wishlistProductsLoading());
-    // console.log(`${url}/${path}`);
-    try {
-      let res = await axios.post(
-        `${url}/cart/decreaseqty`,
-        { prod: product },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      // console.log("response", res.data.data);
-      if (res.data.status) {
-        getCartProductsApi(token);
-        return { status: true };
-      } else {
-        dispatch(wishlistProductsError());
-      }
-    } catch (err) {
-      console.log(err);
-      dispatch(wishlistProductsError());
-    }
-  };
-
-export const deleteCartProductsApi =
+export const deleteWishlistProductsApi =
   (prodID: string, token: string) => async (dispatch: AppDispatch) => {
     dispatch(wishlistProductsLoading());
     // console.log(`${url}/${path}`);
     try {
-      let res = await axios.delete(`${url}/cart/deletecartitem/${prodID}`, {
-        headers: {
-          Authorization: token,
-        },
-      });
+      let res = await axios.delete(
+        `${url}/wishlist/deletewishlistitem/${prodID}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
       // console.log("response", res.data.data);
       if (res.data.status) {
-        getCartProductsApi(token);
-        return { status: true };
+        dispatch(removeWishlistOneProductSuccess(prodID));
       } else {
         dispatch(wishlistProductsError());
-        return { status: false };
       }
+      return res.data;
     } catch (err) {
       console.log(err);
       dispatch(wishlistProductsError());
+      return { status: false, mssg: "Something went wrong" };
     }
   };
 
-export const deleteCartAllApi =
+export const deleteWishlistAllApi =
   (token: string) => async (dispatch: AppDispatch) => {
     dispatch(wishlistProductsLoading());
     // console.log(`${url}/${path}`);
     try {
-      let res = await axios.delete(`${url}/cart/deletemycart`, {
+      let res = await axios.delete(`${url}/wishlist/deletemywishlist`, {
         headers: {
           Authorization: token,
         },
