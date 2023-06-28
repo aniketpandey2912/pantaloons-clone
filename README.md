@@ -20,6 +20,8 @@
 
 <img src="https://github.com/aniketpandey2912/pantaloons-clone/blob/main/public/3.png?raw=true" alt="project-screenshot" width="500" height="250/">
 
+<img src="https://github.com/aniketpandey2912/pantaloons-clone/blob/main/public/9.png?raw=true" alt="project-screenshot" width="500" height="250/">
+
 <img src="https://github.com/aniketpandey2912/pantaloons-clone/blob/main/public/4.png?raw=true" alt="project-screenshot" width="500" height="250/">
 
 <img src="https://github.com/aniketpandey2912/pantaloons-clone/blob/main/public/5.png?raw=true" alt="project-screenshot" width="500" height="250/">
