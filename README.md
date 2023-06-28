@@ -33,7 +33,7 @@
 <p>1. Clone the repo</p>
 
 ```
-git clone https://github.com/dhiraj19999/cold-lamp-3047-.git
+git clone https://github.com/aniketpandey2912/pantaloons-clone.git
 ```
 
 <p>2. Install NPM packages</p>
@@ -65,6 +65,4 @@ npm start
 ![mongodb](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)&nbsp;
 ![jwt](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white)&nbsp;
 
-<h2>Special Thanks 😊</h2>
-
-<p>Thanks Masai School for giving us this opportunity to show and deploy our skills to explore ideas and learn new things about project-making </p>
+<h2>Thanks 😊</h2>
