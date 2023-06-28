@@ -1,25 +1,19 @@
-<h1 align="center" id="title">Flopkart🛒</h1>
+<h1 align="center" id="title">Pantaloons🛒</h1>
 
-<p align="center"><img src="https://user-images.githubusercontent.com/110104542/221482200-6a080f16-cfc0-442e-b61c-1567631b11c6.jpg" alt="project-image" width="300" height="150/"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/aniketpandey2912/pantaloons-clone/main/public/pantaloons_favicon.ico" alt="project-image" width="300" height="150/"></p>
 
 
-<p>A Flopkart website is an e-commerce platform that replicates the functionalities and features of the popular Indian online marketplace, Flipkart. It allows users to browse and purchase a wide range of products such as electronics, fashion, home appliances, books, and more. Like Flipkart, the Flopkart website typically includes features such as a user-friendly interface, product reviews and ratings, product search,  
-user registration and login, user profile section, add to cart and checkout page</p>
+<p>This is a clone of an e-commerce website Pantaloons replicating some of the features and functionalities of original website.</p>
 
-### Collaborators-
+### Solo Project
 
-| Team members | Github-profiles |
-| ------ | ------ |
-| Chandra Shekhar Joshi | <https://github.com/Shekhar-Joshi07> |
-| Aniket Pandey | <https://github.com/aniketpandey2912> | 
-| Piryanshu Bisht | <https://github.com/Piryanshu88> |
-| Mayuri Saha |  <https://github.com/Mayuri-Saha18> |
+| Aniket Pandey | <https://github.com/aniketpandey2912> |
+
 
 
 <h2>🌐See Live here 👇</h2>
 
-<h4>➡️ Vercel Link: https://flopcart-nine.vercel.app/</h4>
-<h4>➡️ Netlify Link: https://flopkart-online-app.netlify.app/</h4>
+<h4>➡️ Vercel Link: https://pantaloons-clone.vercel.app/</h4>
 
 <h2>Sneak Peek of website</h2>
 
