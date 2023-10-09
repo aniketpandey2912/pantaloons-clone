@@ -49,7 +49,7 @@ const initStatePayment: intiTypePayment = {
   cvv: "",
 };
 
-const Checkout = (props: any) => {
+const Checkout = () => {
   const { token } = useAppSelector((store) => store.authManager);
   const { loading } = useAppSelector((store) => store.ordersManager);
   const toast = useToast();

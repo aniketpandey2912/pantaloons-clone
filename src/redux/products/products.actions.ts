@@ -17,8 +17,23 @@ const getSingleProductsSuccess = (payload: ProductProps) => ({
   payload,
 });
 
-// APIs
+const searchedProductsLoading = () => ({
+  type: types.GET_SEARCHED_PRODUCTS_LOADING,
+});
+const searchedProductsError = () => ({
+  type: types.GET_SEARCHED_PRODUCTS_ERROR,
+});
 
+const searchedProductsSuccess = (payload: ProductProps[]) => ({
+  type: types.GET_SEARCHED_PRODUCTS_SUCCESS,
+  payload,
+});
+
+const emptySearchedProductsSuccess = () => ({
+  type: types.EMPTY_SEARCHED_PRODUCTS_SUCCESS,
+});
+
+// APIs
 export const getProductsApi =
   (path: string) => async (dispatch: AppDispatch) => {
     dispatch(productsLoading());
@@ -36,6 +51,28 @@ export const getProductsApi =
       dispatch(productsError());
     }
   };
+
+export const getSearchedProductsApi =
+  (path: string) => async (dispatch: AppDispatch) => {
+    dispatch(searchedProductsLoading());
+    // console.log(`${url}/${path}`);
+    try {
+      let res = await axios.get(`${url}/${path}`);
+      // console.log("response", res.data);
+      if (res.data.status) {
+        dispatch(searchedProductsSuccess(res.data.data));
+      } else {
+        dispatch(searchedProductsError());
+      }
+    } catch (err) {
+      console.log(err);
+      dispatch(searchedProductsError());
+    }
+  };
+
+export const emptySearchedProductsApi = () => async (dispatch: AppDispatch) => {
+  dispatch(emptySearchedProductsSuccess());
+};
 
 export const getProductsByIDApi =
   (prodID: string) => async (dispatch: AppDispatch) => {

@@ -43,7 +43,7 @@ const ProductDetailsCard = () => {
 
   const handleAddToCart = () => {
     dispatch(addCartProductsApi(singleProd, token)).then((res: any) => {
-      console.log(res.status);
+      // console.log(res.status);
       if (res.status) {
         toast({
           title: "Added To Cart",
